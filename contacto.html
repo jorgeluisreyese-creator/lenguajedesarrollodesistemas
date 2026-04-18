@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -63,9 +64,9 @@
 
     <body>
         <header>
-            <img src="café.jpg" alt="Café" width="100" />
-            <h1>Retro Café</h1>
-            <p>El mejor café de la ciudad</p>
+            <img src="café.jpg" style="width: 100px;" alt="Café" />
+            <h1 style="font-size: 36px;">Retro Café</h1>
+            <p style="font-size: 20px;">El mejor café de la ciudad</p>
         </header>
     </body>
     <body>
@@ -77,21 +78,27 @@
         <a href="#" style="color: red;">CONTACTO</a>
         <a href="pedironline.html">PEDIDO ONLINE</a>
         </nav>
-        <div class="container">
-        <h2>Contáctanos</h2>
-        <p>¿Tienes alguna pregunta o comentario? ¡Nos encantaría saber de ti!</p>
-        <form action="#" method="post">
-            <label for="name">Nombre:</label><br />
-            <input type="text" id="name" name="name" required /><br /><br />
-            <label for="email">Correo electrónico:</label><br />
-            <input type="email" id="email" name="email" required /><br /><br />
-            <label for="message">Mensaje:</label><br />
-            <textarea id="message" name="message" rows="5" required></textarea><br /><br />
-            <button type="submit">Enviar</button>
-           
-        </form>
 
+        <section style="background-image: url('cafeteria.jpg'); background-size: cover; padding: 20px 50px; opacity: 0.9; text-align: center;">
+            <h2 style="color: black; font-size: 48px;">¡Contáctanos!</h2>
+            <p style="color: black; font-size: 24px;">¿Tienes alguna pregunta o comentario? ¡Nos encantaría saber de ti!</p>
+
+             <div class="container"; style="text-align: justify;">
+            <form action="enviar_contacto.php" method="post">
+                <label for="nombre" style="font-size: 24px;">Nombre/Apellido:</label><br>
+                <input type="text"style="font-size: 24px;opacity: 0.8;" id="nombre" name="nombre" required><br><br>
+
+                <label for="email" style="font-size: 24px;">Correo Electrónico:</label><br>
+                <input type="email" style="font-size: 24px;opacity: 0.8;" id="email" name="email" required><br><br>
+
+                <label for="mensaje" style="font-size: 24px;">Mensaje:</label><br>
+                <textarea id="mensaje" name="mensaje" style=" font-size: 24px;opacity: 0.8;" rows="5" required></textarea><br><br>
+
+                <input type="submit" style="font-size: 24px;" value="Enviar">
+            </form>
         </div>
+        </section>
+
         <footer>
             <p> 📍Lima, Perú | Tel: 996527160</p>
             <p>&copy; 2026 Retro Café.</p>
