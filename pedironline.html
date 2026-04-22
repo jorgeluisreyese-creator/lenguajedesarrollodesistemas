@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Realiza tu pedido online</h1>
+    <form action="/submit_order" method="post">
+        <label for="name">Nombre:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="address">Dirección de entrega:</label><br>
+        <input type="text" id="address" name="address" required><br><br>
+
+        <label for="phone">Número de teléfono:</label><br>
+        <input type="tel" id="phone" name="phone" required><br><br>
+
+        <label for="order">Detalles del pedido:</label><br>
+        <textarea id="order" name="order" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Enviar Pedido">
+    </form>
+    
+
+</body>
+</html>
