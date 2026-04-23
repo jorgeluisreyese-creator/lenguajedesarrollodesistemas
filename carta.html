@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Retro Café - Menú Interactivo</title>
+    <head>
+    <meta charset="UTF-8" />
+    <title>Retro Café</title>
     <style>
-        * {
-            margin: 0;
-        
-        }
-        
+       :root {
+            --cafe-oscuro: #4b2e1e;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --texto: #333;
+      }
         body {
-            background-color: #f5f1e8;
-            padding-bottom: 50px;
-        }
-     
-        
+         font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: var(--texto);
+            line-height: 1.6;
+      }
+  
         header {
-            background-color: #6b4423;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
+              background-color: #6b3e26;
+        color: white;
+        padding: 20px;
+        text-align: center;
         }
         
         
@@ -66,29 +70,48 @@
             height: 150px;
             object-fit: cover;
         }
+   
+      .container {
+        padding: 20px;
+      }
 
+      .menu {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+        .item {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        width: 250px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-    
-        .menu-detalle {
-            padding: 20px 40px;
-            border-top: 2px solid #f5f1e8;
-            background-color: #fafafa;
-        }
+      footer {
+        background-color: #6b3e26;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+      }
 
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">Retro Café</div>
+      <img src="café.jpg" alt="café" width="100" />
+      <h1>Retro Café</h1>
+    </header>
+    <header>
         <nav>
-            <ul>
-                <a href="index.html">Inicio</a>
-                <a href="nosotros.html">Nosotros</a>
-                <a href="carta.html"  style="color: #dcb28a;">Carta</a>
-                 <a href="galeriía.html">Galeria</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="pedironline.html">Pedir Online</a>
-            </ul>
+      <a href="index.html">INICIO</a>
+      <a href="nosotros.html">NOSOTROS</a>
+      <a href="carta.html" style="color: #dcb28a;">CARTA</a>
+      <a href="contacto.html">GALERÍA</a>
+      <a href="contacto.html">CONTACTO</a>
+      <a href="pedironline">PEDIR ONLINE</a>
+    </nav>
         </nav>
     </header>
 
@@ -198,11 +221,14 @@
         </details>
 
     </main>
-    
-    <footer>
+
+    <div class="container">
+         <footer>
         <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
         <p>📞 994 837 459 | Abierto todos los días</p>
         <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
     </footer>
+    </div>
+    
 </body>
 </html>
