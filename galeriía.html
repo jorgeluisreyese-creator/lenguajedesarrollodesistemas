@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Café | Calidad en cada taza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cafe-oscuro: #4b2e1e;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --texto: #333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* Header con Flexbox */
+        header {
+            background-color: var(--cafe-oscuro);
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 4px solid var(--dorado);
+        }
+
+        header img {
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* Navegación */
+        nav {
+            background-color: var(--cafe-medio);
+            padding: 12px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--dorado);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80'); /* Imagen de fondo opcional */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .container p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .highlight {
+            color: var(--cafe-medio);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: #ddd;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header { flex-direction: column; text-align: center; }
+            nav a { display: block; margin: 10px 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logocafe.svg" alt="Logo Retro Café" width="80">
+        <h1>RETRO CAFÉ</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="carta.html">Carta</a>
+        <a href="galeriía.html">Galeria</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="pedironline.html">Pedir Online</a>
+    </nav>
+
+    <section class="hero">
+        <h2>"El día comienza después de una taza de café"</h2>
+        <p>La vida es un poco mejor con café</p>
+    </section>
+
+    <main class="container">
+        <span class="highlight">Un rincón para detener el tiempo.</span>
+        <p> 
+            En <strong>Retro Café</strong> ofrecemos granos de alta calidad, seleccionados y preparados 
+            por baristas expertos. Ven a disfrutar de un ambiente cálido, música suave y el aroma 
+            irresistible del café recién molido.
+        </p>
+    </main>
+
+    <footer>
+        <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
+        <p>📞 994 837 459 | Abierto todos los días</p>
+        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
