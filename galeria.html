@@ -3,7 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <title>Retro Café</title>
+    <title>Video de Café</title>
     <style>
+             /* El contenedor del video ocupa toda la ventana */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* mantiene la relación y recorta para llenar */
+      z-index: -1;        /* detrás del contenido */
+    }
+    /* Contenido de la página */
+    .contenido {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
       :root {
             --cafe-oscuro: #4b2e1e;
             --cafe-medio: #6b3e26;
@@ -73,6 +96,7 @@
         padding: 15px;
         margin-top: 20px;
       }
+
     </style>
   </head>
 
@@ -91,19 +115,16 @@
         <a href="contacto.html">CONTACTO</a>
         <a href="pedironline.html">PEDIR ONLINE</a>
     </nav>
+     <video class="video-fondo" src="video café.mp4" autoplay muted loop playsinline></video>
+
+  <div class="contenido">
+    <h1>GALERIA</h1>
+
+  </div>
     <div class="mi-contenedor">
-    <h1 style="font-family: 'Times New Roman', Times, serif;">GALERIA</h1>
-    <source src="video café.mp4"> 
-       <video width="100%" height="100%" controls autoplay muted>
-        <source src="video café.mp4">
+    
       
-      </video>
-      <div class="elementor-element elementor-element-a1482e7 elementor-hidden-desktop e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="a1482e7" data-element_type="container"  data-settings="{&quot;background_background&quot;:&quot;video&quot;,&quot;background_video_link&quot;:&quot;https:\/\/vimeo.com\/1167410325?share=copy&amp;fl=sv&amp;fe=ci&quot;,&quot;background_video_start&quot;:0,&quot;background_video_end&quot;:0,&quot;background_play_on_mobile&quot;:&quot;yes&quot;}">
-					<div class="e-con-inner">
-		<div class="elementor-background-video" data-vimeo-initialized="true">
-							<div class="elementor-background-video-embed" role="presentation"></div>
-						<iframe src="https://player.vimeo.com/video/1167410325?muted=1&amp;autoplay=1&amp;loop=1&amp;background=1&amp;app_id=122963" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BV Hero Vertical" data-ready="true" class="elementor-background-video-embed" style="width: 2000px; height: 1000px;"></iframe></div>			</div>
-				</div>
+     
     <p>
       <img src="hamburguessa.jpeg" alt="hamburguessa con sus papitas" width="130em"  height="200em">
       <img src="hamburguessa1.jpeg" alt="foto a la hamburguessa" width="130em  height="100em"">
