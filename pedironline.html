@@ -6,15 +6,14 @@
     <title>Pedidos Online | Retro Café</title>
 
     <style>
-      /* --- CSS DE LA PÁGINA PRINCIPAL (DERECHA) --- */
+      /* --- CSS DE LA PÁGINA PRINCIPAL --- */
       body {
         font-family: Arial, sans-serif;
         margin: 0;
-        background-color: #f5f5f5; /* Color de fondo de la principal */
+        background-color: #f5f5f5;
       }
 
       header.main-header {
-        /* Se renombra para evitar conflicto con el header de pedidos */
         background-color: #6b3e26;
         color: white;
         padding: 20px;
@@ -22,7 +21,6 @@
       }
 
       nav.main-nav {
-        /* Se renombra para evitar conflicto con la navegación de pedidos */
         background-color: #8b5a3c;
         padding: 10px;
         text-align: center;
@@ -36,15 +34,16 @@
       }
 
       .hero {
-        background-image: url("https://images.ctfassets.net/0e6jqcgsrcye/1cn8mAhK2H880m72xCqTRP/355fec59f058684345cfb3c9f7287ee2/Types-of-coffee-beans-hero__1_.jpg");
+        background-image: url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
         background-size: cover;
-        background-position: center; /* Asegura que la imagen se vea bien */
+        background-position: center;
         color: white;
         text-align: center;
         padding: 100px 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
       }
 
-      /* --- CSS ORIGINAL DE LA PÁGINA DE PEDIDOS (IZQUIERDA) --- */
+      /* --- CSS DE LA PÁGINA DE PEDIDOS --- */
       :root {
         --cafe: #4b2e1e;
         --dorado: #c69c6d;
@@ -53,17 +52,15 @@
         --sombra: rgba(0, 0, 0, 0.1);
       }
 
-      /* NOTA: body se sobreescribirá con el de la principal, si quieres mantener el de pedidos, mueve este body debajo del otro. */
       body {
-        font-family: 'Poppins', sans-serif; /* Se mantiene Poppins si esta es la preferida */
-        background-color: var(--crema); /* Fondo específico de pedidos */
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--crema);
         margin: 0;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
       }
 
-      /* El header original de pedidos se renombra y adapta */
       header.order-header {
         background: var(--cafe);
         color: white;
@@ -91,7 +88,6 @@
         font-weight: bold;
       }
 
-      /* Layout Principal */
       .order-container {
         display: grid;
         grid-template-columns: 1fr 350px;
@@ -101,11 +97,11 @@
         padding: 0 20px;
       }
 
-      /* Menú de Productos */
       .menu-section h2 {
         border-bottom: 2px solid var(--dorado);
         padding-bottom: 10px;
         color: var(--cafe);
+        text-align: center;
       }
 
       .products-grid {
@@ -123,6 +119,7 @@
         transition: 0.3s;
         display: flex;
         flex-direction: column;
+        position: relative;
       }
 
       .product-card:hover {
@@ -139,6 +136,11 @@
       .product-info {
         padding: 15px;
         flex-grow: 1;
+        /* Para centrar el botón dentro de la tarjeta */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
       .product-info h3 {
         margin: 0;
@@ -158,16 +160,35 @@
         margin-bottom: 10px;
       }
 
+      /* Ocultamos el checkbox original */
+      .product-checkbox {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      /* Estilo cuando el producto está seleccionado */
+      .product-checkbox:checked ~ .add-btn {
+        background: #27ae60;
+      }
+
       .add-btn {
         background: var(--cafe);
         color: white;
         border: none;
-        width: 100%;
+        width: 80%; /* Ancho fijo para que se vea mejor */
         padding: 10px;
         border-radius: 6px;
         cursor: pointer;
         font-weight: 600;
         transition: 0.3s;
+        /* Esto asegura que esté centrado */
+        margin: 0 auto;
+        display: block;
       }
 
       .add-btn:hover {
@@ -215,14 +236,99 @@
         background: #27ae60;
         color: white;
         border: none;
-        width: 100%;
+        width: 80%;
         padding: 15px;
         border-radius: 8px;
         font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
         margin-top: 10px;
+        /* Centrado */
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
       }
+
+      /* --- CÓDIGO DEL BOTÓN DE VERIFICACIÓN --- */
+      .verificacion {
+        margin-top: 15px;
+        text-align: center;
+      }
+
+      .verificacion input[type="checkbox"] {
+        display: none;
+      }
+
+      /* Mensajes que aparecen al presionar */
+      .msg-correcto, .msg-incorrecto {
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 10px;
+        display: none;
+        font-weight: bold;
+        text-align: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .msg-correcto {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .msg-incorrecto {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      /* Estilo del botón */
+      .verify-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        width: 80%;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+        /* Centrado */
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+
+      .verify-btn:hover {
+        background-color: #2980b9;
+      }
+
+      /* Reglas para mostrar los mensajes */
+      #verificar:checked ~ .msg-incorrecto {
+        display: block;
+      }
+      #verificar:checked ~ .msg-correcto {
+        display: none;
+      }
+
+      #prod1:checked ~ #verificacion #verificar:checked ~ .msg-correcto,
+      #prod2:checked ~ #verificacion #verificar:checked ~ .msg-correcto,
+      #prod3:checked ~ #verificacion #verificar:checked ~ .msg-correcto,
+      #prod4:checked ~ #verificacion #verificar:checked ~ .msg-correcto {
+        display: block;
+      }
+
+      #prod1:checked ~ #verificacion #verificar:checked ~ .msg-incorrecto,
+      #prod2:checked ~ #verificacion #verificar:checked ~ .msg-incorrecto,
+      #prod3:checked ~ #verificacion #verificar:checked ~ .msg-incorrecto,
+      #prod4:checked ~ #verificacion #verificar:checked ~ .msg-incorrecto {
+        display: none;
+      }
+      /* --- FIN DEL CÓDIGO DEL BOTÓN --- */
 
       /* Responsivo */
       @media (max-width: 850px) {
@@ -236,75 +342,81 @@
     </style>
   </head>
   <body>
-    <!-- ** INICIO DE LA PARTE SUPERIOR COPIADA DE LA PÁGINA PRINCIPAL ** -->
+    <!-- ** PARTE SUPERIOR ** -->
     <header class="main-header">
-      <img src="café.jpg" alt="café" width="100" />
+      <img src="" alt="Logo de Retro Café" width="100" />
       <h1>Retro Café</h1>
       <p>El mejor café de la ciudad</p>
     </header>
 
-      <nav class="main-nav">
-      <a href="index.html">INICIO</a>
+    <nav class="main-nav">
+      <a href="inicio.html">INICIO</a>
       <a href="nosotros.html">NOSOTROS</a>
       <a href="carta.html">CARTA</a>
       <a href="galeria.html">GALERÍA</a>
       <a href="contacto.html">CONTACTO</a>
-      <a href="pedironline.html" style="color: #dcb28a;">PEDIR ONLINE</a>
+      <a href="pedironline.html">PEDIR ONLINE</a>
     </nav>
-
 
     <section class="hero">
       <h2>Disfruta de un momento especial</h2>
       <p>Café artesanal y ambiente acogedor</p>
     </section>
-    <!-- ** FIN DE LA PARTE SUPERIOR COPIADA ** -->
 
-    <!-- * ESTE ES EL CONTENIDO ORIGINAL DE TU PÁGINA DE PEDIDOS * -->
+    <!-- CONTENIDO DE PEDIDOS -->
     <div class="order-container">
       <!-- Sección de Productos -->
       <main class="menu-section">
         <h2>Cafetería Caliente</h2>
         <div class="products-grid">
+          <!-- Producto 1 -->
           <div class="product-card">
-            <img src="capuccino.jpeg" alt="Cappuccino" class="product-img" />
+            <input type="checkbox" id="prod1" class="product-checkbox">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSghkATyjQcNn9rPVINBeuW1YC9EG1lpF3Er0Bk7l3chPrf6V-L81AaruI&s" alt="Cappuccino" class="product-img" />
             <div class="product-info">
               <h3>Cappuccino</h3>
               <p>Espresso con leche espumosa y canela.</p>
               <span class="price-tag">s/ 3.50</span>
-              <button class="add-btn">Agregar</button>
+              <label for="prod1" class="add-btn">Agregar</label>
             </div>
           </div>
 
+          <!-- Producto 2 -->
           <div class="product-card">
-            <img src="amaericano.jpeg" alt="Americano" class="product-img" />
+            <input type="checkbox" id="prod2" class="product-checkbox">
+            <img src="data:image/jpeg;base64,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" alt="Americano" class="product-img" />
             <div class="product-info">
               <h3>Americano</h3>
               <p>Doble shot de espresso diluido en agua.</p>
               <span class="price-tag">s/ 2.50</span>
-              <button class="add-btn">Agregar</button>
+              <label for="prod2" class="add-btn">Agregar</label>
             </div>
           </div>
 
+          <!-- Producto 3 -->
           <div class="product-card">
-            <img src="latte.jpg" alt="Latte" class="product-img" />
+            <input type="checkbox" id="prod3" class="product-checkbox">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAwgMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAgEDBAUGB//EADkQAAICAQIEAwQGCgMBAAAAAAABAgMRBBIFITFBUWFxBhOBsRQiIzJzkRUlQlJicoKhssE0Y+Ek/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAECBAMF/8QAIREBAQACAgIDAQEBAAAAAAAAAAECEQQSAzEhMlEzQSP/2gAMAwEAAhEDEQA/APbjJiIklJ8kpiZJTJgsTJT8BESmKglumjY+cpR8VHuZ5cJ0spuf18v+I2pk5I1EzKxyNXpKNNZHam31bk84Ri1OqssrxRVLZ0i8dfQ7OtpU5Kz3fvMLG3s35hpNJKM1bfjf2iukTjcN5NE8smLi/oO63QXX34jbszCHdep6Thb3cK0kn3hj8iyX1oST7rBVwnlw1QfWqxxOkxmPpwyyuXtrySmV5JyXiqxEiJkpgPknJXknID5JyJknID5DIuSMgWBkTJOQGyAuSAOOShQyA5ORUADpk5EGQDIZMrQwD5JyV5GyNB8icP5S1tXmpolPmLppKHE8dramiKLk+ROROhOSYLEyclaY2SQ+QyImTkB8k5EyGQHyTkRMnIDZDIuQyA+QEywA5gAAASAASAABKJFGIEkoVE5AdFNz2anTW/uzw/iWFOrTdDcebi1JC+hrsWJyXmQmQ5uaU/FJh5CX4DEoQZEhicidCUA4ZFTJyA2QEJTQDE5FyADZAXLADCQCAAJIJAkAAA7EpPwJrhusahKPvMfVUu5tp0jcV9IjNSXd9P7cjncvnSdMMpKPi/RZLa6LLfuxx/NyN8adnRRa/ItjPHVY+AlpWf8AR6UMu3L8Eiuejfu3seZY5ZOhujISUIvoy20OdpIXxlGq2utP99rOTqw0MdvNQl57EIq89cDqT08HKMm8diPQiWjh0lVHHksFFuhjjMMp9ufI61VkLa1JdGhLPd/vIbHnpxlXJqaw/wCzIydO+jfGXRRa6vsc6VU10rlt7EyiAyL8MAWDphkQnIDZJyJkAHyAgBDKSBISgkAAAJwGAGojut+B0I++ritlkkvA4ur189BdTKMIzU8qSbN+m43pLcKzdU/NZMnlynbW3bHDK4701rUWrlNQkvOIs9Sl1oX9Mmh4TpuWarYy+Il1OVyRTdhqf6oerrzhRtj/AFIT6bDP3rV8UVWVuLfIzOD58mT3yOsdB62PVXW/Bob6VCaw3ZJecjmRX1i2tpMtM6i4x1KtQlhRjy8G2zTC6Ul1x5JHKjNRWZPCEs4zo6E9+orWO27LL99e1Otdm+X2LMdd1UpRgq4x5YzLxOPZ7T6e2ddOnhOcrJxhufJLLwbl0L+PKZIyxs9ttsISzBxW5PquRkknGTi+qLLrOj8Ugve9Qn3xh/A6qqgAAAAAAyAABVgnBZtDaDatIMFqiTtArwGCzBOPIDicfWFpn/FL5GGL7nR9o1iGmf8AG/kcuPRHmcn+leh4PpFsZPOe/iWfTNTWvs77I+kimPUWZwlsddSlnxfXQbXv8+sUUz47rkvvwf8AQijULm2Y7C28v1HXH8ap8c1/a2MfSCMtvGdfPk9TNemEZ5rCM0y0t/UdcVtuqvsf2l1kv5pNiwlzKJPmPB8xT4dfhbzrtKv+6HzR9Bce5874S/1hpPx4fNH0qMVuS7dTZxfVZeR7ivUxxFeiRl0snY7Z5zF2Pb6GnWt42p4kw01CpphWlhJGpmLgNpdtI2hCraGC3aG0CrAFm0kCvBOBkicAKkTgZIlALtDA5OAOF7TrFOm/nfyOMuh3Pahf/PpvxH8jhLoeZyv6PQ4/0WQ6haLDqTd91HB3Y7epjsNVzMlj6korNazLPuaLGZbGXitVyY9b5lbGrfMmxDr8If6w0n48P8kfTcpOTb/8R8w4S/1hpPx6/wDJH0TU2vKqr5ybNfG9Vl5HuHh9va+XJc2/DyNRXRV7mpRzl/tPxY+TUzJwQxdxDmAxAu8jeA4Cb/MAJRJAAMiRMjJgSMJklMDje1X/ABaPxP8ARwY9Dv8AtUs6KmS6K3/TPOxfJHm8qf8AR6HH+i2HUm7oxa3zJu6Gd3YbnzMlhpuf1mY7GWiKotZlmy+1maZZWq5DV9UVvqPDqWQ6vCm/0hpMdr4Pl1+8j6TRHa1ZKOJdk+q9fP5fmfOOBpz4ro14Wp/lz/0fQXY22a+N6rJyPtGqVvmI7TM5MjLNLO0OwX3hTlhkC33gbyslJgPuAXAAaiMkitATkMikYAfcTuKwSYGfi1L1XD7qo/exuj6o8hXZy58vJnuVHJ5n2h4TbRZPWaSLlU+dkEucX4+hl5Pj7TcafB5OvxWKE1kayacTmw1SGep8zD1bE3PmZLGPZfkzWWk6FdrMtjHttM1lheRUNjwfMzOw1cN0uo4jqo6fSw3SfVvpFeLJ1arbp6P2Qod3EHc19WqPXzZ7P4GbhHDqeF6KOnqe5vnOb6yka8+Bt8WPXHTF5M+2WyYJ5jqEn2LI0yfY7OalRYygzTGh90WKgG2RVseMGa1SOqQbY/dsDb7oAjbPhBhAAShpBtQABG1BtRIATFIsiuTACtTHmPaXguiVMtTXB12Z57HhP4Hg53TjJpdgAy5yNWFpZWz3Y8slU7ZEAc9R23WadkjLbdNQzy64AC2MilqrhLlr+KLTXScYZ/Y5M+tcD0Gm0NMa9NXtS/N+oAdsY4Z13a64y5s0QphjoAHaM9aYUw8CxVx8AAsGcUsYDCAAJwgwgAAwgAAP/9k=" alt="Latte Vainilla" class="product-img" />
             <div class="product-info">
               <h3>Latte Vainilla</h3>
               <p>Suave café con un toque de vainilla francesa.</p>
               <span class="price-tag">s/ 4.00</span>
-              <button class="add-btn">Agregar</button>
+              <label for="prod3" class="add-btn">Agregar</label>
             </div>
           </div>
         </div>
 
         <h2 style="margin-top: 40px;">Acompañamientos</h2>
         <div class="products-grid">
+          <!-- Producto 4 -->
           <div class="product-card">
-            <img src="croissabt.jpeg" alt="Croissant" class="product-img" />
+            <input type="checkbox" id="prod4" class="product-checkbox">
+            <img src="https://media.istockphoto.com/id/1614842743/es/foto/croissant-de-mantequilla-fresca-en-plato-aislado-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=fDVQCC_YgMoYc1chHB9JaG8s35CAbncagxPB5WkuzwY=" alt="Croissant" class="product-img" />
             <div class="product-info">
               <h3>Croissant Mantequilla</h3>
               <p>Hojaldre artesanal recién horneado.</p>
               <span class="price-tag">s/ 2.00</span>
-              <button class="add-btn">Agregar</button>
+              <label for="prod4" class="add-btn">Agregar</label>
             </div>
           </div>
         </div>
@@ -312,7 +424,7 @@
 
       <!-- Sidebar de Carrito -->
       <aside class="cart-sidebar">
-        <h3>Tu Pedido</h3>
+        <h3 style="text-align: center;">Tu Pedido</h3>
         <div class="cart-items">
           <div class="cart-item">
             <span>1x Cappuccino</span>
@@ -338,9 +450,16 @@
             <span>s/ 7.00</span>
           </div>
           <button class="checkout-btn">Confirmar Pedido</button>
+          
+          <!-- Botón de Verificación -->
+          <div class="verificacion" id="verificacion">
+            <input type="checkbox" id="verificar">
+            <label for="verificar" class="verify-btn">Verificar</label>
+            <div class="msg-correcto">✅ Los datos ingresados son correctos</div>
+            <div class="msg-incorrecto">❌ Los datos ingresados son incorrectos, seleccione al menos un producto</div>
+          </div>
+
         </div>
       </aside>
     </div>
-    <!-- * FIN DEL CONTENIDO ORIGINAL DE PEDIDOS * -->
   </body>
-</html>
