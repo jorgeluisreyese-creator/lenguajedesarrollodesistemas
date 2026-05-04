@@ -144,20 +144,37 @@
         }
 
         /* Footer */
-        footer {
+       footer {
             background-color: var(--cafe-oscuro);
-            color: white;
+            color: #ddd;
             text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+            padding: 30px 20px;
+            margin-top: 50px;
         }
 
-        footer p { margin: 5px 0; font-size: 0.9rem; }
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <section id="contacto">
+    <header>
+      <img src="café.jpg" alt="café" width="100" />
+      <h1>Retro Café</h1>
+     
+    </header>
 
+    <nav>
+      <a href="index.html">INICIO</a>
+      <a href="nosotros.html">NOSOTROS</a>
+      <a href="carta.html">CARTA</a>
+      <a href="galeria.html">GALERÍA</a>
+      <a href="contacto.html" style="color: #dcb28a;">CONTACTO</a>
+      <a href="pedironline.html">PEDIR ONLINE</a>
+    </nav>
+    <section id="contacto">
+<div>
     <h2>Contáctanos</h2>
      <div class="container-form">
     <form id="formContacto">
@@ -214,5 +231,46 @@ document.getElementById("formContacto").addEventListener("submit", function(e) {
         "Gracias " + nombre + ", tu mensaje fue enviado ✅";
 });
 </script>
+
+</div>
+<footer>
+    <div>
+          <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
+        <p>📞 994 837 459 | Abierto todos los días</p>
+         <p>🕒 Lunes a Domingo: 7am - 10pm</p>
+        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
+    </div>   
+</footer>
+ <!-- Mapa -->
+    <div class="mapa">
+        <iframe 
+            src="https://www.google.com/maps?q=Lima,Peru&output=embed"
+            width="100%" 
+            height="300" 
+            style="border:0;"
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+
+</section>
+
+<style>
+#contacto {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.info {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.mapa iframe {
+    border-radius: 10px;
+}
+</style>
+
 </body>
 </html>
