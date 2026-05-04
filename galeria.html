@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>Retro Café</title>
     <title>Video de Café</title>
@@ -41,13 +41,30 @@
             color: var(--texto);
             line-height: 1.6;
       }
+ /* Header con Flexbox */
+        header {
+            background-color: var(--cafe-oscuro);
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 4px solid var(--dorado);
+        }
 
-      header {
-        background-color: #6b3e26;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
+        header img {
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin: 0;
+        }
 
       nav {
         background-color: #8b5a3c;
@@ -88,6 +105,12 @@
         width: 250px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
+      .contenedor {
+        display: flex; 
+        flex-wrap: wrap; justify-content: center; /*puedes cambiar a space-between o flex-star*/
+        gap: 20px;
+        margin-top: 50px;
+    }
 
       footer {
         background-color: #6b3e26;
@@ -99,12 +122,10 @@
 
     </style>
   </head>
-
   <body>
-    <header>
-      <img src="café.jpg" alt="café" width="100" />
-      <h1>Retro Café</h1>
-      <p>El mejor café de la ciudad</p>
+     <header>
+        <img src="logocafe.svg" alt="Logo Retro Café" width="80">
+        <h1>RETRO CAFÉ</h1>
     </header>
 
      <nav>
@@ -115,45 +136,345 @@
         <a href="contacto.html">CONTACTO</a>
         <a href="pedironline.html">PEDIR ONLINE</a>
     </nav>
-     <video class="video-fondo" src="video café.mp4" autoplay muted loop playsinline></video>
-
-  <div class="contenido">
-    <h1>GALERIA</h1>
-
-  </div>
-    <div class="mi-contenedor">
-    
-      
-     
-    <p>
-      <img src="hamburguessa.jpeg" alt="hamburguessa con sus papitas" width="130em"  height="200em">
-      <img src="hamburguessa1.jpeg" alt="foto a la hamburguessa" width="130em  height="100em"">
-      <img src="torta.jpeg" alt="torta" width="130em">
-      <img src="taza de café.jpeg" alt="cafe" width="130em">
-      <img src="torta 2.jpeg" alt="torta con chispa de chocolate" width="130em">
-      <img src="café con leche.jpeg" alt="cafe" width="130em">
-      <img src="café clásico.jpeg" alt="recién salido de la máquina" width="130em">
-      <img src="pan con chicharrón.jpeg" alt="pan con chicharrón" width="160em">
-      <img src="capuchino y su postre.jpeg" alt="capuchino" width="210em">
-      <img src="cafe al aire libre.jpeg" alt="afuera" width="130em">
-      <img src="cefeteria retro.jpeg" alt="dentro del local" width="130em">
-      <img src="capuccino.jpeg" alt="capuccino" width="200em" height="100px">
-      <img src="latte.jpg" alt="latte de vainilla" width="200em" height="100px">
-      <img src="croissabt.jpeg" alt="croissabt" width="200em" height="100px">
-      <img src="amaericano.jpeg" alt="amaericano" width="200em" height="100px">
-      <img src="frappes.jpeg" alt="frappes" width="200em" height="100px">
-      <img src="te_negro.jpg" alt="te_negro" width="200em" height="100px">
-      <img src="empanada.jpeg" alt="empanada" width="200em" height="100px">
-      <img src="pie de manzana.jpeg" alt="pie de manzana" width="200em" height="100px">
-      <img src="baguette.jpeg" alt="baguette" width="200em" height="100px">
-      <img src="panini.jpeg" alt="panini" width="200em" height="100px">
-      <img src="sandwich de pavo.jpeg" alt="sandwich de pavo" width="200em" height="100px">
-      <img src="sandwich.jpeg" alt="sandwich" width="200em" height="100px">
-
+     <video class="video-fondo" src="espresso-pouring-into-a-ceramic-cup.mp4" autoplay muted loop playsinline></video>
+      <div class="contenedor"> 
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="hamburguessa.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                <p>"Una hamburguesa clásica lleva un medallón de carne molida (ternera/res, a menudo<br>
+                   mezclada con cerdo para más grasa) sazonada con sal, pimienta, ajo y cebolla en<br>
+                   polvo, servida en un pan (tipo brioche o papa). Se completa con queso cheddar<br>
+                    fundido, lechuga, tomate, cebolla, pepinillos y salsas como mayonesa, kétchup o<br>
+                     mostaza."</p>
+            </div>
+        </details>
       </p>
+    
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="torta.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta torta de chocolate es una tentación irresistible de sabor intenso y textura<br>
+                       húmeda. Destaca por su bizcocho esponjoso y una cobertura cremosa de fudge casero<br>
+                        o ganache, logrando el equilibrio perfecto entre dulzura y la intensidad del cacao puro.<br>
+                         Es el postre clásico ideal para celebrar, con un sabor profundo que enamora."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="taza de café.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>""Descubre el auténtico sabor de un café clásico, diseñado para<br>
+                       acompañar tus mañanas. Nuestro café destaca por un tostado equilibrado<br>
+                        que logra el balance perfecto entre intensidad y suavidad. Con notas<br>
+                         aromáticas a chocolate y frutos secos."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="torta 2.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Este cheesecake de Oreo presenta una base de galletas trituradas, un relleno cremoso<br>
+                       y una cobertura de chantilly con trozos de galleta."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="café con leche.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"El café latte (o latte) es una bebida suave y cremosa, originada popularmente en<br>
+                       EE. UU., que combina una o dos dosis de café espresso con una abundante cantidad de<br>
+                       leche al vapor."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="café clásico.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Se observa el café líquido fluyendo desde el portafiltro de la máquina hacia una taza blanca<br>
+                       pequeña, diseñada para contener entre 25 y 35 ml."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="pan con chicharrón.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"El pan con chicharrón peruano clásico se prepara principalmente con panceta de cerdo<br>
+                       cocida a fuego lento, acompañada de camotes fritos, salsa criolla (cebolla roja, ají limo,<br>
+                        limón) y pan francés. Los ingredientes clave incluyen panceta, agua, sal, ajo,<br>
+                       hierbabuena, pimienta, comino, camotes, cebolla, limón y pan."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="capuchino y su postre.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Este plato es un waffle con fruta acompañado de una taza de café latte con arte latte<br>
+                       en la parte superior."</p>
+                       <p><h4>Detalles del waffle:</h4> Está servido con fresas frescas y rodajas de durazno, rociado con<br>
+                         una salsa de caramelo o dulce de leche.
+                        <h4>Detalles del café:</h4> Se trata de un latte cremoso, posiblemente preparado con café<br>
+                         peruano de especialidad, servido en una taza de vidrio sobre un plato con una base de<br>
+                          arpillera.</p>
+                       
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="cafe al aire libre.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Disfrutando de un momento de brunch al aire libre."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="capuccino.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Un cappuccino clásico se compone de tres partes iguales de café, leche y espuma.<br>
+                       ¡Te las explicamos en detalle! Espresso: La base del cappuccino es un shot de espresso, un<br>
+                       café concentrado y robusto que se prepara con café finamente molido."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="latte.jpg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Un latte de vainilla es una bebida de café espresso cremosa, caracterizada por la<br>
+                       mezcla de leche espumada y jarabe de vainilla. Se prepara combinando un shot de<br>
+                        espresso, sirope de vainilla al gusto y leche caliente texturizada (o bebidas vegetales),<br>
+                       generalmente servido en una taza grande."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="croissant.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"El croissant (o cruasán) es un bollo de panadería francés, reconocido por su forma de<br>
+                       media luna y su textura hojaldrada, crujiente por fuera y suave/aireada por dentro.<br>
+                        Se elabora mediante una técnica de laminado que alterna capas de masa fermentada y<br>
+                         mantequilla, lo que le otorga un característico sabor mantecoso y un color dorado<br>
+                       intenso."</p>
+            </div>
+                
+        </details>
+        </p>
+         <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="americano.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta es una taza de café espresso servida en vidrio transparente con dos galletas<br>
+                       acompañantes."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="frappes.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"El frappé es una bebida refrescante de hielo licuado con café, leche y sabores"</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="te_negro.jpg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta bebida es rica en antioxidantes y se puede servir caliente o helada."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="empanada.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta imagen muestra una empanada horneada en un plato cuadrado blanco,<br>
+                       acompañada de una ensalada fresca y una taza de café."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="pie de manzana.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta es una fotografía de un trozo de tarta de manzana con helado y una taza de café<br>
+                       expreso ."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="baguette.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta es una imagen de un bocadillo de tortilla esponjosa y queso derretido en pan<br>
+                       baguette servido con café negro."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="panini.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>" La selección incluye opciones populares como panini de prosciutto con mozzarella,<br>
+                       caprese con tomate y albahaca, y variantes con pollo a la parrilla."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="sandwich de pavo.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta es una imagen de un sanguchón de pavo tradicional peruano, caracterizado por su<br>
+                       pan crocante, pavo asado y salsa criolla."</p>
+            </div>
+                
+        </details>
+        </p>
+          <p>
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="sandwich.jpeg" width="200em"  height="250em">
+                </div>
+            </summary>
+            <div class="detalle"  style="color: white;">
+                
+                    <p>"Esta imagen muestra un sándwich de estilo deli o submarino, caracterizado por su gran<br>
+                       tamaño y abundante relleno."</p>
+            </div>
+                
+        </details>
+        </p>
 </div>
 
-<br>
+
 
     <footer>
         <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
