@@ -5,47 +5,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Café - Contáctanos</title>
-    <!-- Fuente Retro de Google Fonts -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Importación de fuentes elegantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --cafe-oscuro: #4a2c1d;
             --cafe-medio: #6b3e26;
             --cafe-claro: #8b5a3c;
-            --beige: #f5f5dc;
+            --dorado: #dcb28a;
+            --crema: #fcf8f5;
             --blanco: #ffffff;
+            --sombra: 0 10px 30px rgba(0,0,0,0.1);
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background-color: #fcf8f5;
+            background-color: var(--crema);
             color: #333;
+            line-height: 1.6;
         }
 
-        /* Header con Flexbox */
+        /* --- Header & Nav --- */
         header {
             background-color: var(--cafe-oscuro);
             color: white;
-            padding: 20px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            border-bottom: 4px solid var(--dorado);
-        }
-
-        header img {
-            border-radius: 50%;
-            background: white;
-            padding: 5px;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid var(--dorado);
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            margin-top: 10px;
         }
 
         nav {
@@ -61,216 +57,221 @@
             color: var(--blanco);
             margin: 0 15px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            color: #dcb28a;
+        nav a:hover { color: var(--dorado); }
+
+        /* --- Sección Contacto --- */
+        .main-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 40px;
+            align-items: start;
         }
 
-        /* Sección de Contacto */
-        .contact-section {
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('cafeteria.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        @media (max-width: 850px) {
+            .main-container { grid-template-columns: 1fr; }
         }
 
-        .contact-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--cafe-oscuro);
-            margin-bottom: 10px;
-        }
-
-        /* Formulario */
-        .container-form {
-            background: white;
+        .info-contacto {
+            background: var(--cafe-oscuro);
+            color: white;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
+            height: 100%;
         }
 
-        .form-group {
+        .info-contacto h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
             margin-bottom: 20px;
+            color: var(--dorado);
         }
+
+        .dato {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- Formulario --- */
+        .container-form {
+            background: var(--blanco);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+        }
+
+        .form-group { margin-bottom: 20px; }
 
         label {
             display: block;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 8px;
             color: var(--cafe-oscuro);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea {
+        input, textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 1rem;
-            box-sizing: border-box; /* Evita que el padding ensanche el input */
+            font-family: inherit;
+            transition: 0.3s;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--cafe-claro);
-            box-shadow: 0 0 5px rgba(139, 90, 60, 0.3);
+            box-shadow: 0 0 8px rgba(139, 90, 60, 0.2);
         }
 
-        input[type="submit"] {
-            background-color: var(--cafe-oscuro);
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--cafe-oscuro);
             color: white;
-            padding: 15px 30px;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
             font-weight: bold;
-            width: 100%;
-            transition: background 0.3s;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        input[type="submit"]:hover {
-            background-color: var(--cafe-claro);
+        button:hover {
+            background: var(--cafe-medio);
+            transform: translateY(-2px);
         }
 
-        /* Footer */
-       footer {
-            background-color: var(--cafe-oscuro);
-            color: #ddd;
+        #respuesta {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #27ae60;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
+            display: none; /* Se activa con JS */
         }
 
-        footer p {
-            margin: 5px 0;
-            font-size: 0.9rem;
+        /* --- Mapa --- */
+        .mapa-section {
+            width: 100%;
+            margin-top: 50px;
+            filter: sepia(0.2); /* Toque retro al mapa */
+        }
+
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: #bbb;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 0;
         }
     </style>
 </head>
 <body>
+
     <header>
-      <img src="café.jpg" alt="café" width="100" />
-      <h1>Retro Café</h1>
-     
+        <div class="logo-container">
+            <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
+            <h1>RETRO CAFÉ</h1>
+        </div>
     </header>
 
     <nav>
-      <a href="index.html">INICIO</a>
-      <a href="nosotros.html">NOSOTROS</a>
-      <a href="carta.html">CARTA</a>
-      <a href="galeria.html">GALERÍA</a>
-      <a href="contacto.html" style="color: #dcb28a;">CONTACTO</a>
-      <a href="pedironline.html">PEDIR ONLINE</a>
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="carta.html">Carta</a>
+        <a href="galeria.html">Galería</a>
+        <a href="contacto.html" style="color: var(--dorado);">Contacto</a>
+        <a href="pedironline.html">Pedir Online</a>
     </nav>
-    <section id="contacto">
-<div>
-    <h2>Contáctanos</h2>
-     <div class="container-form">
-    <form id="formContacto">
-        <label for="nombre">Nombre y Apellido</label>
-        <input type="text" id="nombre" placeholder="Tu nombre" required>
-         <label for="email">Correo Electrónico</label>
-        <input type="email" id="correo" placeholder="Tu correo" required>
-         <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-     </div>
-    <p id="respuesta"></p>
 
-</section>
+    <div class="main-container">
+        <!-- Columna 1: Información -->
+        <div class="info-contacto">
+            <h2>Hablemos de Café</h2>
+            <p style="margin-bottom: 30px;">¿Tienes alguna duda, sugerencia o quieres reservar para un evento especial? Escríbenos.</p>
+            
+            <div class="dato">
+                <span>📍</span>
+                <p>Av. Tomas Marzano 2424, Surco, Lima</p>
+            </div>
+            <div class="dato">
+                <span>📞</span>
+                <p>+51 994 837 459</p>
+            </div>
+            <div class="dato">
+                <span>🕒</span>
+                <p>Lunes a Domingo: 7am - 10pm</p>
+            </div>
+        </div>
 
-<style>
-#contacto {
-    max-width: 400px;
-    margin: 50px auto;
-    text-align: center;
-}
+        <!-- Columna 2: Formulario -->
+        <div class="container-form">
+            <form id="formContacto">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">¿En qué podemos ayudarte?</label>
+                    <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+                <button type="submit" id="btnEnviar">Enviar Mensaje</button>
+                <p id="respuesta">¡Gracias! Tu mensaje ha sido enviado ✅</p>
+            </form>
+        </div>
+    </div>
 
-#contacto input,
-#contacto textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-#contacto button {
-    padding: 10px 20px;
-    background: #6b4f4f;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-#contacto button:hover {
-    background: #4a3434;
-}
-</style>
-
-<script>
-document.getElementById("formContacto").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    let nombre = document.getElementById("nombre").value;
-
-    document.getElementById("respuesta").innerHTML =
-        "Gracias " + nombre + ", tu mensaje fue enviado ✅";
-});
-</script>
-
-</div>
-<footer>
-    <div>
-          <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
-        <p>📞 994 837 459 | Abierto todos los días</p>
-         <p>🕒 Lunes a Domingo: 7am - 10pm</p>
-        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
-    </div>   
-</footer>
- <!-- Mapa -->
-    <div class="mapa">
+    <!-- Mapa a lo ancho -->
+    <section class="mapa-section">
         <iframe 
-            src="https://www.google.com/maps?q=Lima,Peru&output=embed"
+            src="https://www.google.com/maps?q=Santiago+de+Surco,Lima,Peru&output=embed"
             width="100%" 
-            height="300" 
-            style="border:0;"
+            height="400" 
+            style="border:0; display:block;"
             allowfullscreen="" 
             loading="lazy">
         </iframe>
-    </div>
+    </section>
 
-</section>
+    <footer>
+        <p>&copy; 2026 Retro Café. Cuidando cada grano para ti.</p>
+    </footer>
 
-<style>
-#contacto {
-    max-width: 800px;
-    margin: 50px auto;
-    text-align: center;
-}
+    <script>
+        document.getElementById("formContacto").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById("btnEnviar");
+            const respuesta = document.getElementById("respuesta");
+            const nombre = document.getElementById("nombre").value;
 
-.info {
-    margin-bottom: 20px;
-    font-size: 18px;
-}
+            // Simulación de carga
+            btn.innerText = "Enviando...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
 
-.mapa iframe {
-    border-radius: 10px;
-}
-</style>
-
+            setTimeout(() => {
+                btn.style.display = "none";
+                respuesta.style.display = "block";
+                respuesta.innerHTML = `¡Gracias ${nombre}! Hemos recibido tu mensaje. Nos vemos pronto en el café. ☕`;
+                
+                // Opcional: Limpiar formulario
+                document.getElementById("formContacto").reset();
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
