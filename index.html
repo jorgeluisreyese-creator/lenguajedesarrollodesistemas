@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Café | Calidad en cada taza</title>
-    <!-- Fuentes y Iconos -->
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -28,7 +28,7 @@
             overflow-x: hidden;
         }
 
-        /* --- Header & Logo --- */
+        /* --- Encabezado --- */
         header {
             background-color: var(--cafe-oscuro);
             padding: 1.5rem;
@@ -59,6 +59,7 @@
             z-index: 1000;
             padding: 0.5rem 0;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transicion);
         }
 
         .nav-links {
@@ -76,8 +77,8 @@
             font-weight: 600;
             font-size: 0.85rem;
             text-transform: uppercase;
-            transition: var(--transicion);
             position: relative;
+            transition: var(--transicion);
         }
 
         .nav-links a::after {
@@ -95,7 +96,7 @@
         .nav-links a:hover::after { width: 70%; }
         .nav-links a:hover { color: var(--dorado); }
 
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
             height: 60vh;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
@@ -109,18 +110,17 @@
             color: white;
             text-align: center;
             padding: 20px;
+            overflow: hidden;
         }
 
         .hero h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards;
+            min-height: 1.2em; /* Evita saltos mientras se escribe */
         }
 
-        /* --- Grid de Contenido --- */
+        /* --- Contenedor Principal --- */
         .container {
             max-width: 1100px;
             margin: -50px auto 50px;
@@ -143,11 +143,14 @@
             border: 1px solid #eee;
             border-radius: 8px;
             transition: var(--transicion);
+            text-align: center;
+            background: white;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
             border-color: var(--dorado);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .feature-card i {
@@ -156,7 +159,29 @@
             margin-bottom: 15px;
         }
 
-        /* --- Footer --- */
+        /* --- Botón Ir Arriba --- */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+            border: none;
+            background-color: var(--dorado);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: var(--transicion);
+        }
+
+        #scrollTopBtn:hover {
+            background-color: var(--cafe-oscuro);
+            transform: scale(1.1);
+        }
+
+        /* --- Pie de Página --- */
         footer {
             background-color: var(--cafe-oscuro);
             color: var(--blanco);
@@ -182,19 +207,22 @@
 
         .social-icons a:hover { color: var(--dorado); }
 
-        /* --- Animaciones --- */
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Responsive --- */
+        /* --- Móvil --- */
         @media (max-width: 768px) {
             .nav-links { flex-direction: column; display: none; }
-            .nav-links.active { display: flex; }
-            .menu-toggle { display: block; cursor: pointer; color: white; font-size: 1.5rem; text-align: center; padding: 10px; }
+            .nav-links.active { display: flex; padding: 20px 0; }
+            .menu-toggle { 
+                display: block; 
+                cursor: pointer; 
+                color: white; 
+                padding: 15px; 
+                text-align: center; 
+                background: var(--cafe-medio);
+                font-weight: bold;
+            }
         }
 
-        .menu-toggle { display: none; background: var(--cafe-oscuro); }
+        .menu-toggle { display: none; }
     </style>
 </head>
 
@@ -210,7 +238,7 @@
         <i class="fas fa-bars"></i> MENÚ
     </div>
     
-    <nav>
+    <nav id="main-nav">
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Inicio</a></li>
             <li><a href="nosotros.html">Nosotros</a></li>
@@ -221,15 +249,15 @@
         </ul>
     </nav>
 
-    <section class="hero">
-        <h2>"El día comienza después de una taza de café"</h2>
+    <section class="hero" id="hero">
+        <h2 id="typewriter">"El día comienza después de una taza de café"</h2>
         <p style="font-size: 1.2rem; font-style: italic;">Calidad artesanal en cada grano.</p>
     </section>
 
     <main class="container">
         <div style="text-align: center; max-width: 700px; margin: 0 auto;">
             <h3 style="color: var(--cafe-medio); font-size: 1.8rem;">Un rincón para detener el tiempo</h3>
-            <p>En <strong>Retro Café</strong> seleccionamos granos de origen único para garantizar una experiencia sensorial inigualable. Nuestro ambiente vintage es el refugio perfecto para tus mañanas.</p>
+            <p>En <strong>Retro Café</strong> seleccionamos granos de origen único para garantizar una experiencia sensorial inigualable.</p>
         </div>
 
         <div class="grid-features">
@@ -251,6 +279,8 @@
         </div>
     </main>
 
+    <button id="scrollTopBtn" title="Ir arriba"><i class="fas fa-chevron-up"></i></button>
+
     <footer>
         <div class="footer-content">
             <div>
@@ -263,9 +293,9 @@
             </div>
             <div class="social-icons">
                 <h4>Síguenos</h4>
-                <a href="https://web.facebook.com/"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
                 <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://web.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
         <hr style="border: 0; border-top: 1px solid #444; width: 80%;">
@@ -273,21 +303,49 @@
     </footer>
 
     <script>
-        
+       
+        // 2. MÁQUINA DE ESCRIBIR
+        const twElement = document.getElementById('typewriter');
+        const text = twElement.innerText;
+        twElement.innerText = '';
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                twElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
 
-        // Efecto de scroll para el Navbar
+        // 3. NAVBAR SCROLL & BOTÓN "IR ARRIBA" & PARALLAX
+        const btnTop = document.getElementById("scrollTopBtn");
+        const nav = document.getElementById('main-nav');
+        const hero = document.getElementById('hero');
+
         window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
+            let scrolly = window.scrollY;
+
+            // Navbar Efecto
+            if (scrolly > 80) {
                 nav.style.padding = '0.2rem 0';
                 nav.style.backgroundColor = 'rgba(107, 62, 38, 0.95)';
             } else {
                 nav.style.padding = '0.5rem 0';
                 nav.style.backgroundColor = 'var(--cafe-medio)';
             }
+
+            // Botón arriba
+            btnTop.style.display = scrolly > 400 ? "block" : "none";
+
+            // Parallax Hero
+            hero.style.backgroundPositionY = (scrolly * 0.5) + 'px';
         });
 
-        // Animación simple al hacer scroll
+        btnTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // 4. SCROLL REVEAL (Tarjetas)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -295,19 +353,17 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.feature-card').forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease-out';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease-out';
             observer.observe(card);
         });
-    </script>
-</body>
-</html>
 
-        </div>
-    </footer>
+        // Iniciar máquina de escribir al cargar
+        window.onload = typeWriter;
+    </script>
 </body>
 </html>
