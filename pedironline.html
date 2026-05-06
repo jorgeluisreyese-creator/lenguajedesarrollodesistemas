@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos Online | Retro Café</title>
+    <style>
+        :root {
+            --color-cafe: #6b3e26;
+            --color-cafe-claro: #8b5a3c;
+            --color-dorado: #c69c6d;
+            --color-crema: #fdf5e6;
+            --color-blanco: #ffffff;
+            --color-sombra: rgba(0, 0, 0, 0.1);
+            --color-exito: #27ae60;
+            --color-error: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-crema);
+            line-height: 1.6;
+        }
+
+        header.main-header {
+            background-color: var(--color-cafe);
+            color: var(--color-blanco);
+            padding: 20px;
+            text-align: center;
+        }
+
+        header.main-header img {
+            margin-bottom: 10px;
+        }
+
+        nav.main-nav {
+            background-color: var(--color-cafe-claro);
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav.main-nav a {
+            color: var(--color-blanco);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav.main-nav a:hover {
+            color: var(--color-dorado);
+        }
+
+        .hero {
+            background-image: url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+            background-size: cover;
+            background-position: center;
+            color: var(--color-blanco);
+            text-align: center;
+            padding: 100px 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero h2 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .menu-section h2 {
+            text-align: center;
+            color: var(--color-cafe);
+            border-bottom: 2px solid var(--color-dorado);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--color-blanco);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--color-sombra);
+            transition: transform 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 150px;
+            background-color: #eee;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 18px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-info h3 {
+            color: var(--color-cafe);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .price-tag {
+            font-weight: bold;
+            color: var(--color-cafe);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .add-btn {
+            background-color: var(--color-cafe);
+            color: var(--color-blanco);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 85%;
+            margin-bottom: 10px;
+        }
+
+        .add-btn:hover {
+            background-color: var(--color-dorado);
+        }
+
+        .add-btn.agregado {
+            background-color: var(--color-exito);
+        }
+
+        .cantidad {
+            width: 70px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .cart-sidebar {
+            background-color: var(--color-blanco);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--color-sombra);
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-sidebar h3 {
+            text-align: center;
+            color: var(--color-cafe);
+            border-bottom: 2px solid var(--color-dorado);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .datos-cliente, .metodo-pago {
+            background-color: #f9f3eb;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0d2c0;
+            margin-bottom: 20px;
+        }
+
+        .datos-cliente h4, .metodo-pago h4 {
+            text-align: center;
+            color: var(--color-cafe);
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e0d2c0;
+            padding-bottom: 5px;
+        }
+
+        .datos-cliente label, .metodo-pago label {
+            display: block;
+            margin: 10px 0 3px;
+            font-weight: bold;
+            color: var(--color-cafe);
+            font-size: 0.9rem;
+        }
+
+        .datos-cliente input,
+        .datos-cliente textarea,
+        .metodo-pago input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .datos-cliente input:focus,
+        .datos-cliente textarea:focus,
+        .metodo-pago input:focus {
+            outline: none;
+            border-color: var(--color-dorado);
+        }
+
+        .campo-obligatorio {
+            border-color: var(--color-error) !important;
+            background-color: #fff2f2;
+        }
+
+        .lista-carrito {
+            min-height: 100px;
+            border-bottom: 1px dashed #ccc;
+            margin-bottom: 15px;
+        }
+
+        .item-carrito {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-nombre {
+            font-weight: bold;
+            color: var(--color-cafe);
+        }
+
+        .item-detalle {
+            display: flex;
+            gap: 10px;
+            color: #555;
+        }
+
+        .btn-eliminar {
+            background-color: var(--color-error);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .total-section {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px solid var(--color-cafe);
+        }
+
+        .fila {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .total-final {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: var(--color-cafe);
+        }
+
+        .btn-pedido {
+            background-color: var(--color-exito);
+            color: var(--color-blanco);
+            border: none;
+            width: 85%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto 0;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .btn-pedido:hover {
+            background-color: #219150;
+        }
+
+        .validacion {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .mensaje {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .msg-correcto {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .msg-incorrecto {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            text-align: left;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            color: #666;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 850px) {
+            .order-container {
+                grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <img src="café.jpg" alt="Logo de Retro Café" width="100">
+        <h1>Retro Café</h1>
+        <p>El mejor café de la ciudad</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="index.html">INICIO</a>
+        <a href="nosotros.html">NOSOTROS</a>
+        <a href="carta.html">CARTA</a>
+        <a href="galeria.html">GALERÍA</a>
+        <a href="contacto.html">CONTACTO</a>
+        <a href="pedironline.html">PEDIR ONLINE</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Disfruta de un momento especial</h2>
+        <p>Café artesanal y ambiente acogedor</p>
+    </section>
+
+    <div class="order-container">
+        <main class="menu-section">
+            <h2>Cafetería Caliente</h2>
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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" alt="Cappuccino" class="product-img">
+                    <div class="product-info">
+                        <h3>Cappuccino</h3>
+                        <p>Espresso con leche espumosa y canela.</p>
+                        <span class="price-tag">s/ 3.50</span>
+                        <input type="number" min="1" value="1" class="cantidad" id="cant-prod1">
+                        <button type="button" class="add-btn" data-id="prod1" data-name="Cappuccino" data-price="3.50">Agregar</button>
+                    </div>
+                </div>
+                                <!-- Producto 2 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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" alt="Americano" class="product-img">
+                    <div class="product-info">
+                        <h3>Americano</h3>
+                        <p>Doble shot de espresso diluido en agua.</p>
+                        <span class="price-tag">s/ 2.50</span>
+                        <input type="number" min="1" value="1" class="cantidad" id="cant-prod2">
+                        <button type="button" class="add-btn" data-id="prod2" data-name="Americano" data-price="2.50">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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" alt="Latte Vainilla" class="product-img">
+                    <div class="product-info">
+                        <h3>Latte Vainilla</h3>
+                        <p>Suave café con un toque de vainilla francesa.</p>
+                        <span class="price-tag">s/ 3.80</span>
+                        <input type="number" min="1" value="1" class="cantidad" id="cant-prod3">
+                        <button type="button" class="add-btn" data-id="prod3" data-name="Latte Vainilla" data-price="3.80">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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" alt="Mocachino" class="product-img">
+                    <div class="product-info">
+                        <h3>Mocachino</h3>
+                        <p>Café con chocolate y leche cremosa.</p>
+                        <span class="price-tag">s/ 4.00</span>
+                        <input type="number" min="1" value="1" class="cantidad" id="cant-prod4">
+                        <button type="button" class="add-btn" data-id="prod4" data-name="Mocachino" data-price="4.00">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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" alt="Café con Leche" class="product-img">
+                    <div class="product-info">
+                        <h3>Café con Leche</h3>
+                        <p>Café suave con abundante leche caliente.</p>
+                        <span class="price-tag">s/ 3.20</span>
+                        <input type="number" min="1" value="1" class="cantidad" id="cant-prod5">
+                        <button type="button" class="add-btn" data-id="prod5" data-name="Café con Leche" data-price="3.20">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,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"alt="Café Cortado" class="product-img">
+                    <div class="product-info">
+                        <h3>Café Cortado</h3>
+                        <p>Espresso con una pequeña cantidad de leche.</p>
+                        <span class="price-tag">s/ 2.80</span>
+                        <input type="number" min
+                        ="1" value="1" class="cantidad" id="cant-prod6">
+                        <button type="button" class="add-btn" data-id="prod6" data-name="Café Cortado" data-price="2.80">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- BARRA LATERAL DEL CARRITO -->
+        <aside class="cart-sidebar">
+            <h3>Tu Pedido</h3>
+
+            <!-- FORMULARIO DE DATOS DE ENTREGA -->
+            <div class="datos-cliente">
+                <h4>Datos de Entrega</h4>
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Escribe tu nombre completo">
+
+                <label for="direccion">Dirección:</label>
+                <textarea id="direccion" placeholder="Calle, número, distrito, referencia"></textarea>
+
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="Número de teléfono">
+            </div>
+
+            <!-- SECCIÓN DE MÉTODO DE PAGO -->
+            <div class="metodo-pago">
+                <h4>Método de Pago</h4>
+                <label><input type="radio" name="pago" value="tarjeta" checked> Tarjeta de Crédito/Débito</label>
+                
+                <label for="num-tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="num-tarjeta" placeholder="1234 5678 9012 3456" maxlength="16">
+
+                <label for="fecha-venc">Fecha de Vencimiento:</label>
+                <input type="text" id="fecha-venc" placeholder="MM/AA" maxlength="5">
+
+                <label for="cod-seguridad">Código de Seguridad:</label>
+                <input type="text" id="cod-seguridad" placeholder="123" maxlength="3">
+            </div>
+
+            <!-- LISTA DE PRODUCTOS SELECCIONADOS -->
+            <div class="lista-carrito" id="lista-carrito">
+                <div class="carrito-vacio">Tu carrito está vacío. Agrega productos.</div>
+            </div>
+
+            <!-- TOTAL DEL PEDIDO -->
+            <div class="total-section">
+                <div class="fila">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">s/ 0.00</span>
+                </div>
+                <div class="fila">
+                    <span>Envío:</span>
+                    <span id="envio">s/ 3.00</span>
+                </div>
+                <div class="fila total-final">
+                    <span>Total a Pagar:</span>
+                    <span id="total">s/ 3.00</span>
+                </div>
+            </div>
+
+            <button class="btn-pedido" id="btn-realizar">Realizar Pedido</button>
+
+            <!-- SECCIÓN DE MENSAJES -->
+            <div class="validacion">
+                <div class="mensaje msg-correcto" id="msg-correcto">✅ ¡Sus datos han sido correctamente ingresados! Su pedido ha sido registrado exitosamente. Pronto nos contactaremos con usted.</div>
+                <div class="mensaje msg-incorrecto" id="msg-incorrecto">❌ <strong>Por favor complete los siguientes campos:</strong><br><ul id="lista-errores"></ul></div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- CÓDIGO JAVASCRIPT COMPLETO Y FUNCIONAL -->
+    <script>
+        // Variables globales
+        const carrito = [];
+        const COSTO_ENVIO = 3.00;
+
+        // Elementos del DOM
+        const listaCarritoEl = document.getElementById('lista-carrito');
+        const subtotalEl = document.getElementById('subtotal');
+        const totalEl = document.getElementById('total');
+        const btnRealizar = document.getElementById('btn-realizar');
+        const msgCorrecto = document.getElementById('msg-correcto');
+        const msgIncorrecto = document.getElementById('msg-incorrecto');
+        const listaErrores = document.getElementById('lista-errores');
+
+        // Campos del formulario
+        const campos = {
+            nombre: document.getElementById('nombre'),
+            direccion: document.getElementById('direccion'),
+            telefono: document.getElementById('telefono'),
+            numTarjeta: document.getElementById('num-tarjeta'),
+            fechaVenc: document.getElementById('fecha-venc'),
+            codSeguridad: document.getElementById('cod-seguridad')
+        };
+
+        // Mensajes de error personalizados
+        const mensajesError = {
+            nombre: '• Nombre completo',
+            direccion: '• Dirección de entrega',
+            telefono: '• Teléfono de contacto',
+            numTarjeta: '• Número de tarjeta',
+            fechaVenc: '• Fecha de vencimiento',
+            codSeguridad: '• Código de seguridad',
+            carrito: '• Agregar al menos un producto al carrito'
+        };
+
+        // Función para agregar productos al carrito
+        document.querySelectorAll('.add-btn').forEach(boton => {
+            boton.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const nombre = this.dataset.name;
+                const precio = parseFloat(this.dataset.price);
+                const cantidad = parseInt(document.getElementById(`cant-${id}`).value);
+
+                // Verificar si el producto ya está en el carrito
+                const productoExistente = carrito.find(item => item.id === id);
+
+                if (productoExistente) {
+                    // Actualizar cantidad
+                    productoExistente.cantidad = cantidad;
+                } else {
+                    // Agregar nuevo producto
+                    carrito.push({ id, nombre, precio, cantidad });
+                }
+
+                // Cambiar estilo del botón
+                this.classList.add('agregado');
+                this.textContent = '✓ Agregado';
+
+                // Actualizar vista del carrito
+                actualizarCarrito();
+            });
+        });
+
+        // Función para eliminar producto del carrito
+        window.eliminarProducto = function(id) {
+            const indice = carrito.findIndex(item => item.id === id);
+            if (indice !== -1) {
+                carrito.splice(indice, 1);
+
+                // Restaurar botón del producto
+                const botonProducto = document.querySelector(`.add-btn[data-id="${id}"]`);
+                botonProducto.classList.remove('agregado');
+                botonProducto.textContent = 'Agregar';
+
+                actualizarCarrito();
+            }
+        };
+
+        // Actualizar contenido y totales del carrito
+        function actualizarCarrito() {
+            listaCarritoEl.innerHTML = '';
+
+            if (carrito.length === 0) {
+                listaCarritoEl.innerHTML = '<div class="carrito-vacio">Tu carrito está vacío. Agrega productos.</div>';
+                subtotalEl.textContent = 's/ 0.00';
+                totalEl.textContent = `s/ ${COSTO_ENVIO.toFixed(2)}`;
+                return;
+            }
+
+            let subtotal = 0;
+
+            carrito.forEach(producto => {
+                const subtotalProducto = producto.precio * producto.cantidad;
+                subtotal += subtotalProducto;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'item-carrito';
+                itemEl.innerHTML = `
+                    <div class="item-nombre">${producto.nombre}</div>
+                    <div class="item-detalle">
+                        <span>Cant: ${producto.cantidad}</span>
+                        <span>Subt: s/ ${subtotalProducto.toFixed(2)}</span>
+                        <button type="button" class="btn-eliminar" onclick="eliminarProducto('${producto.id}')">×</button>
+                    </div>
+                `;
+                listaCarritoEl.appendChild(itemEl);
+            });
+
+            subtotalEl.textContent = `s/ ${subtotal.toFixed(2)}`;
+            const totalFinal = subtotal + COSTO_ENVIO;
+            totalEl.textContent = `s/ ${totalFinal.toFixed(2)}`;
+        }
+
+        // Función principal para realizar el pedido
+        btnRealizar.addEventListener('click', function() {
+            // Ocultar mensajes anteriores
+            msgCorrecto.style.display = 'none';
+            msgIncorrecto.style.display = 'none';
+            
+            // Quitar resaltado de campos anteriores
+            Object.values(campos).forEach(campo => campo.classList.remove('campo-obligatorio'));
+            
+            // Array para guardar errores
+            const errores = [];
+
+            // Validar carrito
+            if (carrito.length === 0) {
+                errores.push('carrito');
+            }
+
+            // Validar cada campo
+            Object.entries(campos).forEach(([clave, campo]) => {
+                if (campo.value.trim() === '') {
+                    errores.push(clave);
+                    campo.classList.add('campo-obligatorio');
+                }
+            });
+
+            // Mostrar resultados
+            if (errores.length === 0) {
+                // Todo correcto
+                msgCorrecto.style.display = 'block';
+                msgIncorrecto.style.display = 'none';
+            } else {
+                // Hay errores - mostrar lista detallada
+                listaErrores.innerHTML = '';
+                errores.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = mensajesError[error];
+                    listaErrores.appendChild(li);
+                });
+                msgIncorrecto.style.display = 'block';
+                msgCorrecto.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

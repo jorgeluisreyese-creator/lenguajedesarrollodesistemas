@@ -1,126 +1,369 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>Retro Café</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Café | Calidad en cada taza</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #f5f5f5;
-      }
+        :root {
+            --cafe-oscuro: #2c1a10;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --blanco: #ffffff;
+            --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
-      header {
-        background-color: #6b3e26;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
+        * { box-sizing: border-box; }
 
-      nav {
-        background-color: #8b5a3c;
-        padding: 10px;
-        text-align: center;
-      }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: #333;
+            overflow-x: hidden;
+        }
 
-      nav a {
-        color: white;
-        margin: 0 15px;
-        text-decoration: none;
-        font-weight: bold;
-      }
+        /* --- Encabezado --- */
+        header {
+            background-color: var(--cafe-oscuro);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--dorado);
+        }
 
-      .hero {
-        background-image: url("https://images.ctfassets.net/0e6jqcgsrcye/1cn8mAhK2H880m72xCqTRP/355fec59f058684345cfb3c9f7287ee2/Types-of-coffee-beans-hero__1_.jpg");
-        background-size: cover;
-        color: white;
-        text-align: center;
-        padding: 100px 20px;
-      }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
-      .container {
-        padding: 20px;
-      }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blanco);
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 3px;
+        }
 
-      .menu {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
+        /* --- Navegación --- */
+        nav {
+            background-color: var(--cafe-medio);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transicion);
+        }
 
-      .item {
-        background: white;
-        padding: 15px;
-        border-radius: 10px;
-        width: 250px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-      footer {
-        background-color: #6b3e26;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-      }
+        .nav-links a {
+            color: var(--blanco);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transicion);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 50%;
+            background: var(--dorado);
+            transition: var(--transicion);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after { width: 70%; }
+        .nav-links a:hover { color: var(--dorado); }
+
+        /* --- Hero --- */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            min-height: 1.2em; /* Evita saltos mientras se escribe */
+        }
+
+        /* --- Contenedor Principal --- */
+        .container {
+            max-width: 1100px;
+            margin: -50px auto 50px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: var(--transicion);
+            text-align: center;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--dorado);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--cafe-medio);
+            margin-bottom: 15px;
+        }
+
+        /* --- Botón Ir Arriba --- */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+            border: none;
+            background-color: var(--dorado);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: var(--transicion);
+        }
+
+        #scrollTopBtn:hover {
+            background-color: var(--cafe-oscuro);
+            transform: scale(1.1);
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: var(--blanco);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            gap: 30px;
+        }
+
+        .social-icons a {
+            color: var(--blanco);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: var(--transicion);
+        }
+
+        .social-icons a:hover { color: var(--dorado); }
+
+        /* --- Móvil --- */
+        @media (max-width: 768px) {
+            .nav-links { flex-direction: column; display: none; }
+            .nav-links.active { display: flex; padding: 20px 0; }
+            .menu-toggle { 
+                display: block; 
+                cursor: pointer; 
+                color: white; 
+                padding: 15px; 
+                text-align: center; 
+                background: var(--cafe-medio);
+                font-weight: bold;
+            }
+        }
+
+        .menu-toggle { display: none; }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-      <img src="café.jpg" alt="café" width="100">
-      <h1>Retro Café</h1>
-      <p>El mejor café de la ciudad</p>
+        <div class="logo-container">
+            <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
+            <h1>RETRO CAFÉ</h1>
+        </div>
     </header>
 
-    <nav>
-      <a href="index.html">INICIO</a>
-      <a href="nosotros.html">NOSOTROS</a>
-      <a href="carta.html">CARTA</a>
-      <a href="galeriía.html">GALERÍA</a>
-      <a href="contacto.html">CONTACTO</a>
-      <a href="pedironline.html">PEDIR ONLINE</a>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i> MENÚ
+    </div>
+    
+    <nav id="main-nav">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="carta.html">Carta</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="pedironline.html" style="color: var(--dorado)">Pedir Online</a></li>
+        </ul>
     </nav>
 
-    <section class="hero">
-      <h2>Disfruta de un momento especial</h2>
-      <p>Café artesanal y ambiente acogedor</p>
+    <section class="hero" id="hero">
+        <h2 id="typewriter">"El día comienza después de una taza de café"</h2>
+        <p style="font-size: 1.2rem; font-style: italic;">Calidad artesanal en cada grano.</p>
     </section>
 
-    <div class="container">
-      <h2>Menú Destacado</h2>
-      <div class="menu">
-        <div class="item">
-          <h3>Espresso</h3>
-          <p>Intenso y aromático</p>
-          <strong>S/ 6.00</strong>
+    <main class="container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <h3 style="color: var(--cafe-medio); font-size: 1.8rem;">Un rincón para detener el tiempo</h3>
+            <p>En <strong>Retro Café</strong> seleccionamos granos de origen único para garantizar una experiencia sensorial inigualable.</p>
         </div>
 
-        <div class="item">
-          <h3>Cappuccino</h3>
-          <p>Con leche espumosa</p>
-          <strong>S/ 8.00</strong>
+        <div class="grid-features">
+            <div class="feature-card">
+                <i class="fas fa-seedling"></i>
+                <h4>Grano Orgánico</h4>
+                <p>Cosechado de manera sostenible por productores locales.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mug-hot"></i>
+                <h4>Baristas Expertos</h4>
+                <p>Arte y precisión en cada método de extracción.</p>
+            </div>
+            <a href="pedironline.html" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                <i class="fas fa-moped"></i>
+                <h4>Delivery</h4>
+                <p>Llevamos el aroma de Retro Café hasta tu puerta.</p>
+            </a>
         </div>
+    </main>
 
-        <div class="item">
-          <h3>Latte</h3>
-          <p>Suave y cremoso</p>
-          <strong>S/ 15.00</strong>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <h2>Sobre Nosotros</h2>
-      <p>
-        En <strong>Retro Café</strong> ofrecemos café de alta calidad, preparado
-        por baristas expertos en un ambiente cálido y acogedor.
-      </p>
-    </div>
+    <button id="scrollTopBtn" title="Ir arriba"><i class="fas fa-chevron-up"></i></button>
 
     <footer>
-      <p>📍 Lima, Perú | 📞 999999999</p>
-      <p>&copy; 2026 Retro Café</p>
+        <div class="footer-content">
+            <div>
+                <h4>Visítanos</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
+            </div>
+            <div>
+                <h4>Horario</h4>
+                <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
+            </div>
+            <div class="social-icons">
+                <h4>Síguenos</h4>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                <a href="https://web.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; width: 80%;">
+        <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
     </footer>
-  </body>
+
+    <script>
+       
+        // 2. MÁQUINA DE ESCRIBIR
+        const twElement = document.getElementById('typewriter');
+        const text = twElement.innerText;
+        twElement.innerText = '';
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                twElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // 3. NAVBAR SCROLL & BOTÓN "IR ARRIBA" & PARALLAX
+        const btnTop = document.getElementById("scrollTopBtn");
+        const nav = document.getElementById('main-nav');
+        const hero = document.getElementById('hero');
+
+        window.addEventListener('scroll', () => {
+            let scrolly = window.scrollY;
+
+            // Navbar Efecto
+            if (scrolly > 80) {
+                nav.style.padding = '0.2rem 0';
+                nav.style.backgroundColor = 'rgba(107, 62, 38, 0.95)';
+            } else {
+                nav.style.padding = '0.5rem 0';
+                nav.style.backgroundColor = 'var(--cafe-medio)';
+            }
+
+            // Botón arriba
+            btnTop.style.display = scrolly > 400 ? "block" : "none";
+
+            // Parallax Hero
+            hero.style.backgroundPositionY = (scrolly * 0.5) + 'px';
+        });
+
+        btnTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // 4. SCROLL REVEAL (Tarjetas)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease-out';
+            observer.observe(card);
+        });
+
+        // Iniciar máquina de escribir al cargar
+        window.onload = typeWriter;
+    </script>
+</body>
 </html>

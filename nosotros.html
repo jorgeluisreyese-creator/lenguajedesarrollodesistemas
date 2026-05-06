@@ -4,10 +4,19 @@
     <meta charset="UTF-8" />
     <title>Retro Café</title>
     <style>
+      :root {
+            --cafe-oscuro: #4b2e1e;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --texto: #333;
+      }
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #f5f5f5;
+       font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: var(--texto);
+            line-height: 1.6;
       }
 
       header {
@@ -31,7 +40,8 @@
       }
 
       .hero {
-        background-image: url("granos de café.jpeg");
+         background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80'); /* Imagen de fondo opcional */
         background-size: cover;
         color: white;
         text-align: center;
@@ -74,12 +84,12 @@
     </header>
 
     <nav>
-      <a href="inicio.html">INICIO</a>
-      <a href="nosotros.html" style="color: red;">NOSOTROS</a>
+      <a href="index.html">INICIO</a>
+      <a href="nosotros.html" style="color: #dcb28a;">NOSOTROS</a>
       <a href="carta.html">CARTA</a>
-      <a href="contacto.html">GALERÍA</a>
+      <a href="galeria.html">GALERÍA</a>
       <a href="contacto.html">CONTACTO</a>
-      <a href="pedironline">PEDIR ONLINE</a>
+      <a href="pedironline.html">PEDIR ONLINE</a>
     </nav>
 
     <section class="hero">
@@ -133,8 +143,9 @@
     </div>
 
     <footer>
-      <p>📍 Lima, Perú | 📞999999999</p>
-      <p>&copy; 2026 Retro Café</p>
+        <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
+        <p>📞 994 837 459 | Abierto todos los días</p>
+        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
     </footer>
   </body>
 </html>
