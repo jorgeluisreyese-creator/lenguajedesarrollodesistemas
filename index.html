@@ -1,14 +1,26 @@
+<!-- Indica al navegador que el archivo utiliza el estándar HTML5 -->
 <!DOCTYPE html>
+<!-- Apertura del documento HTML especificando que el idioma es español -->
 <html lang="es">
 <head>
+    <!-- Define la codificación de caracteres para procesar tildes, eñes y caracteres especiales -->
     <meta charset="UTF-8" />
+    
+    <!-- Configura el área de visión para que la web sea responsiva en móviles y tablets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título de la página que se visualiza en la pestaña del navegador -->
     <title>Retro Café | Calidad en cada taza</title>
-    <!-- Fuentes y Iconos -->
+    
+    <!-- Enlace para importar las fuentes "Playfair Display" y "Poppins" desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Enlace para importar el catálogo de iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Bloque de diseño y estilos CSS -->
     <style>
+        /* Variables globales para colores y transiciones reutilizables */
         :root {
             --cafe-oscuro: #2c1a10;
             --cafe-medio: #6b3e26;
@@ -18,198 +30,226 @@
             --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        /* Reseteo universal: incluye el relleno y bordes en el tamaño total del elemento */
         * { box-sizing: border-box; }
 
+        /* Estilos generales del cuerpo de la página */
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background-color: var(--crema);
-            color: #333;
-            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif; /* Tipografía para el texto general */
+            margin: 0; /* Elimina los márgenes que el navegador pone por defecto */
+            background-color: var(--crema); /* Color de fondo general */
+            color: #333; /* Color oscuro para la lectura del texto */
+            overflow-x: hidden; /* Evita que aparezca una barra de desplazamiento horizontal */
         }
 
-        /* --- Header & Logo --- */
+        /* --- Estilos del Encabezado (Logo y Título) --- */
         header {
-            background-color: var(--cafe-oscuro);
-            padding: 1.5rem;
-            text-align: center;
-            border-bottom: 3px solid var(--dorado);
+            background-color: var(--cafe-oscuro); /* Color de fondo café oscuro */
+            padding: 1.5rem; /* Espacio interno superior e inferior */
+            text-align: center; /* Centra el texto */
+            border-bottom: 3px solid var(--dorado); /* Línea decorativa dorada abajo */
         }
 
+        /* Contenedor flexible para alinear la imagen del logo y el texto del h1 */
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+            display: flex; /* Activa flexbox para alinear elementos en fila */
+            align-items: center; /* Alineación vertical al centro */
+            justify-content: center; /* Alineación horizontal al centro */
+            gap: 15px; /* Separación entre la imagen y el texto */
         }
 
+        /* Estilos para el título h1 dentro del header */
         header h1 {
-            font-family: 'Playfair Display', serif;
-            color: var(--blanco);
-            font-size: 2.8rem;
-            margin: 0;
-            letter-spacing: 3px;
+            font-family: 'Playfair Display', serif; /* Tipografía elegante para títulos */
+            color: var(--blanco); /* Color del texto blanco */
+            font-size: 2.8rem; /* Tamaño de fuente grande */
+            margin: 0; /* Elimina márgenes por defecto del h1 */
+            letter-spacing: 3px; /* Espaciado entre las letras del título */
         }
 
-        /* --- Navegación --- */
+        /* --- Barra de Navegación --- */
         nav {
-            background-color: var(--cafe-medio);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 0.5rem 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background-color: var(--cafe-medio); /* Color de fondo café medio */
+            position: sticky; /* Hace que el menú se quede pegado arriba al hacer scroll */
+            top: 0; /* Se queda fijo exactamente en el borde superior de la pantalla */
+            z-index: 1000; /* Superpone el menú por encima de cualquier otro contenido */
+            padding: 0.5rem 0; /* Espaciado interno superior e inferior */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Sombra suave inferior para dar relieve */
         }
 
+        /* Contenedor de la lista de enlaces de navegación */
         .nav-links {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            display: flex; /* Coloca los elementos de la lista en una sola fila */
+            justify-content: center; /* Centra la lista horizontalmente */
+            list-style: none; /* Elimina las viñetas o puntos de la lista */
+            padding: 0; /* Elimina el relleno por defecto */
+            margin: 0; /* Elimina los márgenes por defecto */
         }
 
+        /* Estilos para cada enlace individual del menú */
         .nav-links a {
-            color: var(--blanco);
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            transition: var(--transicion);
-            position: relative;
+            color: var(--blanco); /* Color del texto blanco */
+            padding: 10px 20px; /* Área de clic amplia alrededor del texto */
+            text-decoration: none; /* Elimina el subrayado clásico de los enlaces */
+            font-weight: 600; /* Texto en negrita */
+            font-size: 0.85rem; /* Tamaño de letra compacto */
+            text-transform: uppercase; /* Fuerza el texto a mayúsculas */
+            transition: var(--transicion); /* Suaviza el cambio de color al pasar el cursor */
+            position: relative; /* Base de posicionamiento para la línea animada inferior */
         }
 
+        /* Crea una línea invisible debajo del texto para el efecto de animación */
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 5px;
-            left: 50%;
-            background: var(--dorado);
-            transition: var(--transicion);
-            transform: translateX(-50%);
+            content: ''; /* Obligatorio para crear el elemento visual */
+            position: absolute; /* Permite ubicar la línea libremente */
+            width: 0; /* Empieza con ancho cero (no se ve) */
+            height: 2px; /* Grosor de la línea */
+            bottom: 5px; /* Separación desde el borde inferior del enlace */
+            left: 50%; /* Centra la línea */
+            background: var(--dorado); /* Color dorado para la línea */
+            transition: var(--transicion); /* Hace que la línea crezca con suavidad */
+            transform: translateX(-50%); /* Ajusta el centrado exacto */
         }
 
+        /* Cuando el usuario pasa el mouse por encima, la línea dorada crece al 70% del enlace */
         .nav-links a:hover::after { width: 70%; }
+        /* Cambia el color del texto del enlace a dorado al pasar el cursor */
         .nav-links a:hover { color: var(--dorado); }
 
-        /* --- Hero Section --- */
+        /* --- Sección de Bienvenida (Hero) --- */
         .hero {
-            height: 60vh;
+            height: 60vh; /* Ocupa el 60% de la altura de la pantalla del usuario */
+            /* Mezcla un fondo oscuro transparente con una imagen de cafetería para que el texto sea legible */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 20px;
+            background-size: cover; /* Ajusta la imagen para cubrir toda el área de la sección */
+            background-position: center; /* Centra la imagen de fondo */
+            display: flex; /* Activa flexbox */
+            flex-direction: column; /* Coloca los textos en columna (uno abajo del otro) */
+            justify-content: center; /* Centra verticalmente el contenido */
+            align-items: center; /* Centra horizontalmente el contenido */
+            color: white; /* Color de texto blanco */
+            text-align: center; /* Centra el texto */
+            padding: 20px; /* Margen interno para pantallas pequeñas */
         }
 
+        /* Estilo del título h2 dentro de la portada */
         .hero h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards;
+            font-family: 'Playfair Display', serif; /* Tipografía elegante para títulos */
+            font-size: clamp(2rem, 5vw, 3.5rem); /* Tamaño de letra fluido que se adapta a la pantalla */
+            margin-bottom: 1rem; /* Margen inferior para separarlo del párrafo */
+            opacity: 0; /* Inicialmente invisible para que funcione la animación */
+            transform: translateY(30px); /* Empieza 30 píxeles más abajo */
+            animation: fadeInUp 1s forwards; /* Llama a la animación de entrada */
         }
 
-        /* --- Grid de Contenido --- */
+        /* --- Contenedor Principal de la Web --- */
         .container {
-            max-width: 1100px;
-            margin: -50px auto 50px;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
+            max-width: 1100px; /* Ancho máximo de lectura */
+            margin: -50px auto 50px; /* Margen negativo arriba para que la caja flote sobre la portada */
+            padding: 40px; /* Espacio interior amplio */
+            background: white; /* Color de fondo blanco */
+            border-radius: 12px; /* Esquinas redondeadas */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra elegante que da profundidad */
+            position: relative; /* Asegura el correcto posicionamiento del contenido */
         }
 
+        /* Distribución en cuadrícula para las tarjetas de características */
         .grid-features {
-            display: grid;
+            display: grid; /* Activa el modo Grid CSS */
+            /* Crea columnas automáticas de mínimo 250px según el espacio disponible */
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 30px; /* Espacio de separación entre tarjetas */
+            margin-top: 40px; /* Espacio superior para separarlo del párrafo de bienvenida */
         }
 
+        /* Diseño individual de las tarjetas de características */
         .feature-card {
-            padding: 20px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            transition: var(--transicion);
+            padding: 20px; /* Espaciado interno de la tarjeta */
+            border: 1px solid #eee; /* Borde muy sutil de color gris claro */
+            border-radius: 8px; /* Esquinas ligeramente redondeadas */
+            transition: var(--transicion); /* Suaviza los cambios del hover */
         }
 
+        /* Efecto al pasar el cursor sobre la tarjeta */
         .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--dorado);
+            transform: translateY(-10px); /* Eleva la tarjeta verticalmente */
+            border-color: var(--dorado); /* El borde cambia a color dorado */
         }
 
+        /* Estilo para los iconos de Font Awesome dentro de las tarjetas */
         .feature-card i {
-            font-size: 2rem;
-            color: var(--cafe-medio);
-            margin-bottom: 15px;
+            font-size: 2rem; /* Tamaño grande para el icono */
+            color: var(--cafe-medio); /* Color café medio para destacar */
+            margin-bottom: 15px; /* Separación inferior con el título de la tarjeta */
         }
 
-        /* --- Footer --- */
+        /* --- Pie de Página (Footer) --- */
         footer {
-            background-color: var(--cafe-oscuro);
-            color: var(--blanco);
-            padding: 4rem 2rem 2rem;
-            text-align: center;
+            background-color: var(--cafe-oscuro); /* Color de fondo café oscuro */
+            color: var(--blanco); /* Color del texto blanco */
+            padding: 4rem 2rem 2rem; /* Espaciado interno superior e inferior amplio */
+            text-align: center; /* Centra el texto */
         }
 
+        /* Contenedor flexible para estructurar los elementos del footer */
         .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-            gap: 30px;
+            display: flex; /* Activa flexbox */
+            flex-wrap: wrap; /* Hace que los elementos bajen si no caben en la pantalla */
+            justify-content: space-around; /* Distribuye las columnas con espacio equitativo */
+            max-width: 1200px; /* Ancho máximo de alineación */
+            margin: 0 auto 2rem; /* Centra el bloque y añade margen inferior */
+            gap: 30px; /* Separación entre elementos */
         }
 
+        /* Estilos para los iconos de redes sociales en el footer */
         .social-icons a {
-            color: var(--blanco);
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: var(--transicion);
+            color: var(--blanco); /* Iconos blancos */
+            font-size: 1.5rem; /* Tamaño de los iconos */
+            margin: 0 10px; /* Separación lateral entre iconos */
+            transition: var(--transicion); /* Suaviza el cambio de color */
         }
 
+        /* Cambia el color de los iconos de redes sociales a dorado al pasar el cursor */
         .social-icons a:hover { color: var(--dorado); }
 
-        /* --- Animaciones --- */
+        /* --- Animación de Entrada de Texto --- */
         @keyframes fadeInUp {
+            /* Define el final de la animación: completamente opaco y en su lugar original */
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Responsive --- */
+        /* --- Estilos Responsivos (Móviles) --- */
         @media (max-width: 768px) {
+            /* Oculta los enlaces de navegación tradicionales y los pone en lista vertical */
             .nav-links { flex-direction: column; display: none; }
+            /* Cuando se active mediante JS, el menú móvil se mostrará en bloque flexible */
             .nav-links.active { display: flex; }
+            /* Muestra el botón de hamburguesa MENÚ que estaba oculto en computadoras */
             .menu-toggle { display: block; cursor: pointer; color: white; font-size: 1.5rem; text-align: center; padding: 10px; }
         }
 
+        /* Oculta por defecto el botón MENÚ en pantallas grandes */
         .menu-toggle { display: none; background: var(--cafe-oscuro); }
     </style>
 </head>
 
 <body>
+    <!-- Encabezado con logo y título del negocio -->
     <header>
         <div class="logo-container">
+            <!-- Logo SVG con filtro invertido para cambiar su color a blanco -->
             <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
             <h1>RETRO CAFÉ</h1>
         </div>
     </header>
 
+    <!-- Botón del menú móvil (visible solo en pantallas de celulares) -->
     <div class="menu-toggle" id="mobile-menu">
         <i class="fas fa-bars"></i> MENÚ
     </div>
     
+    <!-- Barra de enlaces de navegación principal -->
     <nav>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Inicio</a></li>
@@ -217,98 +257,63 @@
             <li><a href="carta.html">Carta</a></li>
             <li><a href="galeria.html">Galería</a></li>
             <li><a href="contacto.html">Contacto</a></li>
+            <!-- Enlace especial destacado con estilo en línea color dorado -->
             <li><a href="pedironline.html" style="color: var(--dorado)">Pedir Online</a></li>
         </ul>
     </nav>
 
+    <!-- Portada con imagen de fondo y eslogan de bienvenida -->
     <section class="hero">
         <h2>"El día comienza después de una taza de café"</h2>
         <p style="font-size: 1.2rem; font-style: italic;">Calidad artesanal en cada grano.</p>
     </section>
 
+    <!-- Contenido principal que se superpone a la portada -->
     <main class="container">
+        <!-- Texto descriptivo introductorio centrado -->
         <div style="text-align: center; max-width: 700px; margin: 0 auto;">
             <h3 style="color: var(--cafe-medio); font-size: 1.8rem;">Un rincón para detener el tiempo</h3>
             <p>En <strong>Retro Café</strong> seleccionamos granos de origen único para garantizar una experiencia sensorial inigualable. Nuestro ambiente vintage es el refugio perfecto para tus mañanas.</p>
         </div>
 
+        <!-- Sección de tarjetas con las características clave -->
         <div class="grid-features">
+            <!-- Tarjeta 1: Grano Orgánico -->
             <div class="feature-card">
-                <i class="fas fa-seedling"></i>
+                <i class="fas fa-seedling"></i> <!-- Icono de planta -->
                 <h4>Grano Orgánico</h4>
                 <p>Cosechado de manera sostenible por productores locales.</p>
             </div>
+            
+            <!-- Tarjeta 2: Baristas -->
             <div class="feature-card">
-                <i class="fas fa-mug-hot"></i>
+                <i class="fas fa-mug-hot"></i> <!-- Icono de taza caliente -->
                 <h4>Baristas Expertos</h4>
                 <p>Arte y precisión en cada método de extracción.</p>
             </div>
+            
+            <!-- Tarjeta 3: Delivery (Es un enlace completo hacia pedironline.html) -->
             <a href="pedironline.html" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
-                <i class="fas fa-moped"></i>
+                <i class="fas fa-moped"></i> <!-- Icono de moto de reparto -->
                 <h4>Delivery</h4>
                 <p>Llevamos el aroma de Retro Café hasta tu puerta.</p>
             </a>
         </div>
     </main>
 
+    <!-- Pie de página con información del negocio -->
     <footer>
         <div class="footer-content">
-            <div>
-                <h4>Visítanos</h4>
-                <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
-            </div>
-            <div>
-                <h4>Horario</h4>
-                <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
-            </div>
-            <div class="social-icons">
-                <h4>Síguenos</h4>
-                <a href="https://web.facebook.com/"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
+            <footer>
+         
+        <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
+        <p>📞 994 837 459 | Abierto todos los días</p>
+        <p>🕒 Lunes a Domingo: 7am - 10pm</p>
+        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
+    </div>   
+</footer></p>
             </div>
         </div>
-        <hr style="border: 0; border-top: 1px solid #444; width: 80%;">
-        <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
     </footer>
-
-    <script>
-        // Lógica para el menú móvil
-        const menuToggle = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Efecto de scroll para el Navbar
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.padding = '0.2rem 0';
-                nav.style.backgroundColor = 'rgba(107, 62, 38, 0.95)';
-            } else {
-                nav.style.padding = '0.5rem 0';
-                nav.style.backgroundColor = 'var(--cafe-medio)';
-            }
-        });
-
-        // Animación simple al hacer scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease-out';
-            observer.observe(card);
-        });
-    </script>
 </body>
 </html>
