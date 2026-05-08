@@ -41,29 +41,28 @@
             color: var(--texto);
             line-height: 1.6;
       }
- /* Header con Flexbox */
+
+        /* --- Encabezado --- */
         header {
             background-color: var(--cafe-oscuro);
-            color: white;
-            padding: 20px 5%;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--dorado);
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            border-bottom: 4px solid var(--dorado);
-        }
-
-        header img {
-            border-radius: 50%;
-            background: white;
-            padding: 5px;
+            gap: 15px;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
+            color: var(--blanco);
+            font-size: 2.8rem;
             margin: 0;
+            letter-spacing: 3px;
         }
 
       nav {
@@ -112,20 +111,30 @@
         margin-top: 50px;
     }
 
-      footer {
+       /* --- Pie de Página --- */
+       footer {
         background-color: #6b3e26;
         color: white;
         text-align: center;
         padding: 15px;
         margin-top: 20px;
       }
-
+      .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            gap: 30px;
+        }
     </style>
   </head>
   <body>
-     <header>
-        <img src="logocafe.svg" alt="Logo Retro Café" width="80">
-        <h1>RETRO CAFÉ</h1>
+      <header>
+        <div class="logo-container">
+            <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
+            <h1>RETRO CAFÉ</h1>
+        </div>
     </header>
 
      <nav>
@@ -474,12 +483,21 @@
         </p>
 </div>
 
-
-
     <footer>
-        <p>📍 Av. Tomas Marzano 2424, Santiago de Surco, Lima - Perú</p>
-        <p>📞 994 837 459 | Abierto todos los días</p>
-        <p>&copy; 2026 Retro Café. Todos los derechos reservados.</p>
+        <div class="footer-content">
+            <div>
+                <h4>Visítanos</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
+            </div>
+            <div>
+                <h4>Horario</h4>
+                <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
+            </div>
+           
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; width: 80%;">
+        <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
+      
     </footer>
   </body>
 </html>
