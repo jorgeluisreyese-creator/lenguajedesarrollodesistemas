@@ -95,6 +95,11 @@
             transition: var(--transicion);
         }
 
+        .imagen {
+            text-align: right;
+
+        }
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -259,17 +264,35 @@
         }
 
         .menu-toggle { display: none; }
+       
+
+        .imagen-derecha {
+            position: absolute;    /* Se mueve libremente dentro del contenedor */
+            top: 10px;             /* Distancia desde arriba */
+            right: 10px;           /* Distancia desde la derecha */
+            width: 50px;           /* Tamaño de tu imagen */
+            height: auto;
     </style>
 </head>
 
 <body>
+ 
+    <a href="admin.html">
+    <div class="contenedor">
+        <img src="logousuario.png" alt="Logo" width="40" class="imagen-derecha">
+    </div>
+    </a>
+    
     <header>
         <div class="logo-container">
             <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
             <h1>RETRO CAFÉ</h1>
+       
         </div>
-    </header>
 
+        
+    </header>
+    
     <div class="menu-toggle" id="mobile-menu">
         <i class="fas fa-bars"></i> MENÚ
     </div>
@@ -429,4 +452,5 @@
     </script>
 </body>
 </html>
+
 
