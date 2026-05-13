@@ -272,6 +272,20 @@
             right: 10px;           /* Distancia desde la derecha */
             width: 50px;           /* Tamaño de tu imagen */
             height: auto;
+        }
+          /* Estilo celular */
+    .mobile .contenedor{
+      flex-direction:column;
+    }
+
+    .mobile body{
+      background:#f5f5f5;
+    }
+
+    /* Estilo laptop */
+    .desktop .contenedor{
+      flex-direction:row;
+    }
     </style>
 </head>
 
@@ -450,6 +464,27 @@
         // Iniciar máquina de escribir al cargar
         window.onload = typeWriter;
     </script>
+     <script>
+    function adaptarPantalla() {
+
+      const ancho = window.innerWidth;
+
+      if (ancho <= 768) {
+        document.documentElement.classList.add("mobile");
+        document.documentElement.classList.remove("desktop");
+      } else {
+        document.documentElement.classList.add("desktop");
+        document.documentElement.classList.remove("mobile");
+      }
+    }
+
+    // Ejecutar al cargar
+    adaptarPantalla();
+
+    // Ejecutar cuando cambie tamaño
+    window.addEventListener("resize", adaptarPantalla);
+  </script>
+
 </body>
 </html>
 
