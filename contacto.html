@@ -9,6 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
+            html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* mantiene la relación y recorta para llenar */
+      z-index: -1;        /* detrás del contenido */
+    }
         :root {
              --cafe-oscuro: #2c1a10;
             --cafe-medio: #6b3e26;
@@ -86,6 +99,7 @@
 
         .nav-links a:hover::after { width: 70%; }
         .nav-links a:hover { color: var(--dorado); }
+
 
         /* --- Sección Contacto --- */
         .main-container {
@@ -223,7 +237,9 @@
         <a href="contacto.html" style="color: #dcb28a;">CONTACTO</a>
         <a href="pedironline.html">PEDIR ONLINE</a>
     </nav>
-
+   <video class="video-fondo" src="cafe en taza.mp4.mp4" autoplay muted loop playsinline></video>
+      <div class="contenedor"> 
+        
     <div class="main-container">
         <!-- Columna 1: Información -->
         <div class="info-contacto">
