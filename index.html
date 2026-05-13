@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* mantiene la relación y recorta para llenar */
+      z-index: -1;        /* detrás del contenido */
+    }
         :root {
             --cafe-oscuro: #2c1a10;
             --cafe-medio: #6b3e26;
@@ -271,7 +284,7 @@
             <li><a href="pedironline.html">Pedir Online</a></li>
         </ul>
     </nav>
-
+    <video class="video-fondo" src="videondex.mp4" autoplay muted loop playsinline></video>
     <section class="hero" id="hero">
         <h2 id="typewriter">"El día comienza después de una taza de café"</h2>
         <p style="font-size: 1.2rem; font-style: italic;">Calidad artesanal en cada grano.</p>
