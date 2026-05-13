@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Café - Menú Interactivo</title>
     <style>
+            html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* mantiene la relación y recorta para llenar */
+      z-index: -1;        /* detrás del contenido */
+    }
        :root {
             --cafe-oscuro: #2c1a10;
             --cafe-medio: #6b3e26;
@@ -262,6 +275,7 @@
       <a href="contacto.html">CONTACTO</a>
       <a href="pedironline.html">PEDIR ONLINE</a>
        </nav>
+       <video class="video-fondo" src="videocarta.mp4" autoplay muted loop playsinline></video>
     </header>
 
     <div class="search-container">
