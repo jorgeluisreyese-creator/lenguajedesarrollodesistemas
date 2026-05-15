@@ -541,5 +541,26 @@
         <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
       
     </footer>
+        <script>
+      function adaptarPantalla() {
+        const ancho = window.innerWidth;
+
+        if (ancho <= 768) {
+          document.documentElement.classList.add("mobile");
+          document.documentElement.classList.remove("desktop");
+        } else {
+          document.documentElement.classList.add("desktop");
+          document.documentElement.classList.remove("mobile");
+        }
+      }
+
+      // Ejecutar al cargar
+      adaptarPantalla();
+
+      // Ejecutar cuando cambie tamaño
+      window.addEventListener("resize", adaptarPantalla);
+      const menu = document.querySelector('.nav-links');
+      const toggle = document.querySelector('#mobile-menu'); // tu botón hamburguesa
+    </script>
 </body>
 </html>

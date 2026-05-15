@@ -3,9 +3,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Café - Contáctanos</title>
-    <!-- Importación de fuentes elegantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
             html, body {
@@ -217,6 +216,44 @@
             margin: 0 auto 2rem;
             gap: 30px;
         }
+            nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--cafe-medio);
+}
+
+nav h1{
+    color: white;
+}
+
+nav ul{
+    flex-direction: row;
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+}
+
+@media (max-width: 768px){
+
+    nav{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul{
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+}
+             .menu-toggle { display: none; }
     </style>
 </head>
 <body>
@@ -229,12 +266,14 @@
     </header>
 
     <nav>
+        <ul>
         <a href="index.html">INICIO</a>
         <a href="nosotros.html">NOSOTROS</a>
         <a href="carta.html">CARTA</a>
         <a href="galeria.html">GALERÍA</a>
         <a href="contacto.html" style="color: #dcb28a;">CONTACTO</a>
         <a href="pedironline.html">PEDIR ONLINE</a>
+        </ul>
     </nav>
    <video class="video-fondo" src="cafe en taza.mp4.mp4" autoplay muted loop playsinline></video>
       <div class="contenedor"> 
@@ -326,5 +365,27 @@
             }, 1500);
         });
     </script>
+      <script>
+      function adaptarPantalla() {
+        const ancho = window.innerWidth;
+
+        if (ancho <= 768) {
+          document.documentElement.classList.add("mobile");
+          document.documentElement.classList.remove("desktop");
+        } else {
+          document.documentElement.classList.add("desktop");
+          document.documentElement.classList.remove("mobile");
+        }
+      }
+
+      // Ejecutar al cargar
+      adaptarPantalla();
+
+      // Ejecutar cuando cambie tamaño
+      window.addEventListener("resize", adaptarPantalla);
+      const menu = document.querySelector('.nav-links');
+      const toggle = document.querySelector('#mobile-menu'); // tu botón hamburguesa
+    </script>
 </body>
 </html>
+

@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Retro Café</title>
+    <title>Retro Café - Nosotros</title>
     <style>
                  /* El contenedor del video ocupa toda la ventana */
     html, body {
@@ -141,35 +141,35 @@
             margin: 0 auto 2rem;
             gap: 30px;
         }
-
-       /* RESPONSIVE PARA CELULAR */
-         @media (max-width:768px){
-            .nav-links { flex-direction: column; display: none; }
-            .nav-links.active { display: flex; padding: 20px 0; }
-            .contenedor{ flex-direction:column;}
-                header h1{
-        font-size:28px;
-        }
-
-           nav{
-          flex-direction:column;
-          align-items:center;
-      }
-
-    }
-
+        
+        @media (max-width: 768px) {
+            .nav-links { 
+                flex-direction: column; 
+                display: flex; 
+                align-items: center;
+                width: 100%; 
+                background-color: var(--cafe-medio);
+            }
+               
+            .nav-links.active { display: flex; 
+                padding: 0;
+                justify-content: center;
+                list-style: none;
+                margin: 0;
+                flex-direction: row;
+                }
             .menu-toggle { 
-                display: block; 
+                display: flex; 
                 cursor: pointer; 
                 color: white; 
                 padding: 15px; 
                 text-align: center; 
                 background: var(--cafe-medio);
                 font-weight: bold;
+                
             }
-        
-
-        .menu-toggle { display: none; }
+        }
+             .menu-toggle { display: none; }
     </style>
   </head>
 
@@ -251,5 +251,26 @@
         <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
       
     </footer>
+    <script>
+      function adaptarPantalla() {
+        const ancho = window.innerWidth;
+
+        if (ancho <= 768) {
+          document.documentElement.classList.add("mobile");
+          document.documentElement.classList.remove("desktop");
+        } else {
+          document.documentElement.classList.add("desktop");
+          document.documentElement.classList.remove("mobile");
+        }
+      }
+
+      // Ejecutar al cargar
+      adaptarPantalla();
+
+      // Ejecutar cuando cambie tamaño
+      window.addEventListener("resize", adaptarPantalla);
+      const menu = document.querySelector('.nav-links');
+      const toggle = document.querySelector('#mobile-menu'); // tu botón hamburguesa
+    </script>
   </body>
 </html>
