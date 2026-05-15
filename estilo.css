@@ -1,17 +1,1 @@
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column; /* vertical en móvil */
-    display: flex;          /* visible */
-    align-items: center;    /* centrado */
-    background-color: var(--cafe-medio);
-    width: 100%;
-  }
-}
-.nav-links {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-direction: row; /* horizontal por defecto */
-}
+

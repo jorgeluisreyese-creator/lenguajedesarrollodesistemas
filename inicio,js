@@ -21,9 +21,4 @@ function handlePlayButton() {
     playButton.className = "";
   }
 }
-const menu = document.querySelector('.nav-links');
-const toggle = document.querySelector('#menu-toggle'); // tu botón hamburguesa
 
-toggle.addEventListener('click', () => {
-  menu.classList.toggle('active');
-});
