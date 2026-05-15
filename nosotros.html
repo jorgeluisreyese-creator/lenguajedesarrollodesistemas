@@ -2,6 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+
+        <!-- IMPORTANTE PARA MÓVIL -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Retro Café</title>
     <style>
                  /* El contenedor del video ocupa toda la ventana */
@@ -142,10 +146,22 @@
             gap: 30px;
         }
 
-        /* --- Móvil --- */
-        @media (max-width: 768px) {
+       /* RESPONSIVE PARA CELULAR */
+         @media (max-width:768px){
             .nav-links { flex-direction: column; display: none; }
             .nav-links.active { display: flex; padding: 20px 0; }
+            .contenedor{ flex-direction:column;}
+                header h1{
+        font-size:28px;
+        }
+
+           nav{
+          flex-direction:column;
+          align-items:center;
+      }
+
+    }
+
             .menu-toggle { 
                 display: block; 
                 cursor: pointer; 
@@ -155,7 +171,7 @@
                 background: var(--cafe-medio);
                 font-weight: bold;
             }
-        }
+        
 
         .menu-toggle { display: none; }
     </style>

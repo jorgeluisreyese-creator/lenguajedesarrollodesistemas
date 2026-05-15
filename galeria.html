@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Retro Café</title>
+    <!-- IMPORTANTE PARA MÓVIL -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video de Café</title>
     <style>
              /* El contenedor del video ocupa toda la ventana */
@@ -151,7 +153,7 @@
             margin: 0 auto 2rem;
             gap: 30px;
         }
-           /* RESPONSIVE PARA CELULAR */
+         /* RESPONSIVE PARA CELULAR */
          @media (max-width:768px){
             .nav-links { flex-direction: column; display: none; }
             .nav-links.active { display: flex; padding: 20px 0; }
@@ -551,5 +553,25 @@
         <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
       
     </footer>
+     <script>
+    function adaptarPantalla() {
+
+      const ancho = window.innerWidth;
+
+      if (ancho <= 768) {
+        document.documentElement.classList.add("mobile");
+        document.documentElement.classList.remove("desktop");
+      } else {
+        document.documentElement.classList.add("desktop");
+        document.documentElement.classList.remove("mobile");
+      }
+    }
+
+    // Ejecutar al cargar
+    adaptarPantalla();
+
+    // Ejecutar cuando cambie tamaño
+    window.addEventListener("resize", adaptarPantalla);
+  </script>
   </body>
 </html>
