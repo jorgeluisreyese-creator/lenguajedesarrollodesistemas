@@ -2,139 +2,333 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Retro Café</title>
+    <title>Retro Café - Nosotros</title>
+
+    <!-- Fuentes y CDN copiados de la principal -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
     <style>
-      body {
-        font-family: Arial, sans-serif;
+      /* El contenedor del video ocupa toda la ventana */
+      html, body {
+        height: 100%;
         margin: 0;
-        background-color: #f5f5f5;
+      }
+      .video-fondo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* mantiene la relación y recorta para llenar */
+        z-index: -1;        /* detrás del contenido */
+      }
+      :root {
+        --cafe-oscuro: #2c1a10;
+        --cafe-medio: #6b3e26;
+        --crema: #fdf5e6;
+        --dorado: #c69c6d;
+        --blanco: #ffffff;
+        --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      * { box-sizing: border-box; }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background-color: var(--crema);
+        color: #333;
+        overflow-x: hidden;
       }
 
+      /* --- Encabezado --- */
       header {
-        background-color: #6b3e26;
-        color: white;
-        padding: 20px;
+        background-color: var(--cafe-oscuro);
+        padding: 1.5rem;
         text-align: center;
+        border-bottom: 3px solid var(--dorado);
       }
 
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      header h1 {
+        font-family: 'Playfair Display', serif;
+        color: var(--blanco);
+        font-size: 2.8rem;
+        margin: 0;
+        letter-spacing: 3px;
+      }
+
+      /* --- Botón Admin (Imagen Derecha) --- */
+      .imagen-derecha {
+        position: absolute;    /* Se mueve libremente dentro del contenedor */
+        top: 10px;             /* Distancia desde arriba */
+        right: 10px;           /* Distancia desde la derecha */
+        width: 50px;           /* Tamaño de tu imagen */
+        height: auto;
+        z-index: 2001;
+      }
+
+      /* --- Navegación --- */
       nav {
-        background-color: #8b5a3c;
-        padding: 10px;
-        text-align: center;
+        background-color: var(--cafe-medio);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0.5rem 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: var(--transicion);
       }
 
-      nav a {
-        color: white;
-        margin: 0 15px;
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-links a {
+        color: var(--blanco);
+        padding: 10px 20px;
         text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        position: relative;
+        transition: var(--transicion);
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 50%;
+        background: var(--dorado);
+        transition: var(--transicion);
+        transform: translateX(-50%);
+      }
+
+      .nav-links a:hover::after { width: 70%; }
+      .nav-links a:hover { color: var(--dorado); }
+
+      /* --- Menú Móvil --- */
+      .menu-toggle {
+        display: none;
+        cursor: pointer;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        background: var(--cafe-medio);
         font-weight: bold;
       }
 
+      @media (max-width: 850px) {
+        .menu-toggle {
+          display: block;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background-color: var(--cafe-medio);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links a {
+          padding: 15px;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+      }
+
+      /* --- Secciones de Contenido (Nosotros) --- */
       .hero {
-        background-image: url("granos de café.jpeg");
-        background-size: cover;
         color: white;
         text-align: center;
-        padding: 100px 20px;
+        padding: 60px 20px;
+        
+        margin: 20px auto;
+        max-width: 1100px;
+        border-radius: 12px;
       }
 
       .container {
-        padding: 20px;
-      }
-
-      .menu {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .item {
-        background: white;
-        padding: 15px;
-        border-radius: 10px;
-        width: 250px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      footer {
-        background-color: #6b3e26;
-        color: white;
+        max-width: 1100px;
+        margin: 20px auto 50px;
+        padding: 40px;
+        color: #ffffff;
+        border-radius: 12px;
+        
         text-align: center;
-        padding: 15px;
-        margin-top: 20px;
+      }
+
+      /* --- Pie de Página --- */
+      footer {
+        background-color: var(--cafe-oscuro);
+        color: var(--blanco);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        gap: 30px;
       }
     </style>
   </head>
 
   <body>
+    
+
+    <!-- Encabezado idéntico -->
     <header>
-      <img src="café.jpg" alt="café" width="100" />
-      <h1>Retro Café</h1>
-      <p>El mejor café de la ciudad</p>
+      <div class="logo-container">
+        <img
+          src="logocafe.svg"
+          alt="Logo"
+          width="60"
+          style="filter: invert(1)"
+        />
+        <h1>RETRO CAFÉ</h1>
+      </div>
     </header>
 
-    <nav>
-      <a href="inicio.html">INICIO</a>
-      <a href="nosotros.html" style="color: red;">NOSOTROS</a>
-      <a href="carta.html">CARTA</a>
-      <a href="contacto.html">GALERÍA</a>
-      <a href="contacto.html">CONTACTO</a>
-      <a href="pedironline">PEDIR ONLINE</a>
+    <!-- Botón hamburguesa para móviles -->
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i> MENÚ
+    </div>
+
+    <!-- Menú de navegación idéntico (Nosotros activo en dorado) -->
+    <nav id="main-nav">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html" style="color: #dcb28a">Nosotros</a></li>
+        <li><a href="carta.html">Carta</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="pedironline.html">Pedir Online</a></li>
+      </ul>
     </nav>
 
+    <!-- Video de fondo de esta página -->
+    <video class="video-fondo" src="cafe en taza.mp4.mp4" autoplay muted loop playsinline></video>
+
+    <!-- Bloque Superior de Contenido -->
     <section class="hero">
-      <p style="font-family: Geneva; font-size: 1.5em;">
-        Somos apasionados por el buen café y creímos que el desayuno perfecto<br>
-        debía llegar directo a tu mesa, sin complicaciones. Nacimos con la<br>
-        misión de transformar tus mañanas, seleccionando los mejores granos de<br>
-        altura 100% orgánicos para crear un café con cuerpo, aroma intenso y<br>
-        sabor inolvidable. No solo vendemos desayunos; entregamos energía y<br>
-        calidez en cada taza. Combinamos nuestro café de especialidad con<br>
-        opciones frescas, saludables y artesanales, preparados diariamente para<br>
-        acompañar tu rutina.
+      <p style="font-family: Geneva; font-size: 1.5em; text-shadow: 1px 1px 4px rgba(250, 247, 247, 0.8);">
+        Somos apasionados por el buen café y creímos que el desayuno perfecto debía llegar directo a tu mesa, sin complicaciones. Nacimos con la
+        misión de transformar tus mañanas, seleccionando los mejores granos de altura 100% orgánicos para crear un café con cuerpo, aroma intenso y
+        sabor inolvidable. No solo vendemos desayunos; entregamos energía y calidez en cada taza. Combinamos nuestro café de especialidad con opciones
+        frescas, saludables y artesanales, preparados diariamente para acompañar tu rutina.
       </p>
 
-      <h2>¿Por qué elegirnos?</h2>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-top: 30px;">¿Por qué elegirnos?</h2>
 
-      <p style="font-family: Geneva; font-size: 1.5em;">
+      <p style="font-family: Geneva; font-size: 1.5em; text-shadow: 1px 1px 4px rgba(243, 242, 242, 0.8);">
         Café de Especialidad: Granos seleccionados de los mejores caficultores
-        locales. Desayunos Completos:<br> Opciones saludables y gourmet a un clic.
+        locales. Desayunos Completos: Opciones saludables y gourmet a un clic.
         Delivery rápido: Tu mañana lista sin salir de casa u oficina.
       </p>
 
-      <h3 style="font-family: Geneva; font-size: 1.5em;">
+      <h3 style="font-family: Geneva; font-size: 1.5em; text-shadow: #ffffff; color: rgb(245, 245, 239); margin-top: 20px;">
         En Retro Café ☕, cada mañana comienza con un café extraordinario.
       </h3>
     </section>
-   
-    </div>
 
-    <div class="container">
-      <h2>Sobre Nosotros</h2>
-      <p style="font-family: Geneva; font-size: 1.5em;">
-        En <strong style="font-family: Geneva; font-size: 1.5em;">Retro Café</strong>, nos dedicamos a ofrecer una experiencia única que combina la tradición<br>
-         del buen café con un ambiente cuidadosamente diseñado para el disfrute de nuestros clientes.<br>
-          Nuestro compromiso se centra en brindar productos de altacalidad, elaborados con ingredientes<br>
-           seleccionados y preparados con esmero por nuestro equipo.
-           Creemos que una cafetería no solo<br>
-            es un lugar para consumir, sino también un espacio para compartir, conversar y crear momentos<br>
-             memorables. Por ello, hemos creado un entorno acogedor y elegante que invita a la tranquilidad<br>
-              y al encuentro.<br>
-
- En Retro Café, trabajamos constantemente para mantener altos estándares de servicio,<br>
-  destacándonos por nuestra atención cordial, eficiencia y dedicación en cada detalle. Nuestro objetivo<br>
-   es consolidarnos como una referencia en el sector, ofreciendo siempre una experiencia que supere las<br>
-    expectativas de quienes nos visitan.<br>
-
- Agradecemos la confianza de nuestros clientes y reafirmamos nuestro compromiso de seguir creciendo<br>
-  con responsabilidad, calidad y pasión por el café.
+    <!-- Bloque Inferior de Contenido -->
+    <main class="container">
+      <h1 style="background-color: rgb(233, 227, 227); text-shadow: #f8f4f4; color: var(--cafe-oscuro); padding: 10px; text-align: center; font-family: 'Playfair Display', serif; border-radius: 6px;">Sobre Nosotros</h1>
+      <p style="font-family: Geneva; font-size: 1.3em; text-align: justify; color: #f8f4f4;">
+        En <strong>Retro Café</strong>, nos dedicamos a ofrecer una experiencia única que combina la tradición
+        del buen café con un ambiente cuidadosamente diseñado para el disfrute de nuestros clientes.<br><br>
+        Nuestro compromiso se centra en brindar productos de alta calidad, elaborados con ingredientes seleccionados y preparados con esmero por nuestro equipo.<br>
+        Creemos que una cafetería no solo es un lugar para consumir, sino también un espacio para compartir, conversar y crear momentos memorables. Por ello, hemos
+        creado un entorno acogedor y elegante que invita a la tranquilidad y al encuentro.<br><br>
+        En Retro Café, trabajamos constantemente para mantener altos estándares de servicio, destacándonos por nuestra atención cordial, eficiencia y dedicación en 
+        cada detalle. Nuestro objetivo es consolidarnos como una referencia en el sector, ofreciendo siempre una experiencia que supere las expectativas de quienes nos visitan.<br><br>
+        Agradecemos la confianza de nuestros clientes y reafirmamos nuestro compromiso de seguir creciendo con responsabilidad, calidad y pasión por el café.
       </p>
-      <img src="tasa de café.jpg" alt="café" width="300" />
-    </div>
+    </main>
 
+    <!-- Pie de página -->
     <footer>
-      <p>📍 Lima, Perú | 📞999999999</p>
-      <p>&copy; 2026 Retro Café</p>
+      <div class="footer-content">
+        <div>
+          <h4>Visítanos</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
+        </div>
+      </div>
+      <hr style="border: 0; border-top: 1px solid #444; width: 80%;" />
+      <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
     </footer>
+
+    <!-- Scripts unificados de interacción y adaptabilidad móvil -->
+    <script>
+      // LÓGICA MENÚ MÓVIL
+      const menuToggle = document.getElementById("mobile-menu");
+      const navLinks = document.getElementById("nav-links");
+      const nav = document.getElementById("main-nav");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Navbar Efecto Scroll
+      window.addEventListener("scroll", () => {
+        let scrolly = window.scrollY;
+        if (scrolly > 80) {
+          nav.style.padding = "0.2rem 0";
+          nav.style.backgroundColor = "rgba(107, 62, 38, 0.95)";
+        } else {
+          nav.style.padding = "0.5rem 0";
+          nav.style.backgroundColor = "var(--cafe-medio)";
+        }
+      });
+
+      // Adaptar Pantalla clases helper
+      function adaptarPantalla() {
+        const ancho = window.innerWidth;
+        if (ancho <= 768) {
+          document.documentElement.classList.add("mobile");
+          document.documentElement.classList.remove("desktop");
+        } else {
+          document.documentElement.classList.add("desktop");
+          document.documentElement.classList.remove("mobile");
+        }
+      }
+
+      adaptarPantalla();
+      window.addEventListener("resize", adaptarPantalla);
+    </script>
   </body>
 </html>

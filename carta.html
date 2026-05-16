@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Retro Café - Menú Interactivo</title>
+
+    <!-- Fuentes y CDN idénticos a las demás páginas -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* El contenedor del video ocupa toda la ventana */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .video-fondo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* mantiene la relación y recorta para llenar */
+            z-index: -1;        /* detrás del contenido */
+        }
+        :root {
+            --cafe-oscuro: #2c1a10;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --blanco: #ffffff;
+            --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Encabezado --- */
+        header {
+            background-color: var(--cafe-oscuro);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--dorado);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blanco);
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        /* --- Botón Admin (Imagen Derecha) --- */
+        .imagen-derecha {
+            position: absolute;    
+            top: 10px;             
+            right: 10px;           
+            width: 50px;           
+            height: auto;
+            z-index: 2001;
+        }
+
+        /* --- Navegación --- */
+        nav {
+            background-color: var(--cafe-medio);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transicion);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: var(--blanco);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transicion);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 50%;
+            background: var(--dorado);
+            transition: var(--transicion);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after { width: 70%; }
+        .nav-links a:hover { color: var(--dorado); }
+
+        /* --- Menú Móvil --- */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            background: var(--cafe-medio);
+            font-weight: bold;
+        }
+
+        @media (max-width: 850px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--cafe-medio);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 15px;
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+        }
+
+        /* --- Buscador --- */
+        .search-container {
+            max-width: 850px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+        }
+
+        #menuSearch {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 2px solid var(--cafe-medio);
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- Contenedor de Menú --- */
+        main {
+            padding: 20px;
+            max-width: 850px;
+            margin: 0 auto 50px;
+        }
+
+        details {
+            background: var(--blanco);
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] {
+            transform: translateY(-5px);
+        }
+
+        summary {
+            padding: 20px;
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        .summary-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .summary-content img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .summary-text h2 {
+            color: var(--cafe-oscuro);
+            font-size: 1.5rem;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .summary-text p {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+            margin: 5px 0 0;
+        }
+
+        .summary-text small {
+            color: var(--dorado);
+            font-size: 0.8rem;
+        }
+
+        /* --- Listado de Platos --- */
+        .menu-detalle {
+            padding: 10px 30px 30px;
+            background-color: #fff;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .plato {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            gap: 10px;
+        }
+
+        .plato-header {
+            display: flex;
+            flex-grow: 1;
+            align-items: baseline;
+        }
+
+        .plato-nombre {
+            font-weight: 700;
+            color: #222;
+            white-space: nowrap;
+        }
+
+        .plato-puntos {
+            flex-grow: 1;
+            border-bottom: 2px dotted #ccc;
+            margin: 0 10px;
+        }
+
+        .plato-precio {
+            font-weight: 900;
+            color: var(--cafe-medio);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+        }
+
+        .plato-desc {
+            display: block;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive de la carta */
+        @media (max-width: 600px) {
+            .summary-content { flex-direction: column; text-align: center; }
+            .plato { flex-direction: column; align-items: flex-start; }
+            .plato-puntos { display: none; }
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: var(--blanco);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo-container">
+            <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
+            <h1>RETRO CAFÉ</h1>
+        </div>
+    </header>
+
+    <!-- Botón hamburguesa para móviles -->
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i> MENÚ
+    </div>
+
+    <!-- Menú de navegación unificado (Carta activo en dorado) -->
+    <nav id="main-nav">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="carta.html" style="color: #dcb28a;">Carta</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="pedironline.html">Pedir Online</a></li>
+        </ul>
+    </nav>
+
+    <!-- Video de fondo alternativo para la carta -->
+    <video class="video-fondo" src="videocarta.mp4" autoplay muted loop playsinline></video>
+
+    <!-- Buscador de platos -->
+    <div class="search-container">
+        <input type="text" id="menuSearch" placeholder="Busca tu plato favorito (ej: Lomo, Café...)">
+    </div>
+
+    <!-- Contenedor del Menú Interactivo -->
+    <main class="categoria-container">
+        
+        <!-- Categoría: Desayunos -->
+        <details open> 
+            <summary>
+                <div class="summary-content">
+                    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=150" alt="Desayunos">
+                    <div class="summary-text">
+                        <h2>Desayunos</h2>
+                        <p>Los clásicos del domingo</p>
+                        <small>Click para expandir/contraer</small>
+                    </div>
+                </div>
+            </summary>
+            <div class="menu-detalle">
+                
+                <!-- Pan con Chicharrón -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Pan con Chicharrón</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 24.00</span>
+                    </div>
+                    <span class="plato-desc">Cerdo seleccionado, camote frito y zarza criolla.</span>
+                </div>
+
+                <!-- Butifarra -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Butifarra de Jamón del País</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 20.90</span>
+                    </div>
+                    <span class="plato-desc">Jamón artesanal, lechuga y abundante zarza criolla.</span>
+                </div>
+
+                <!-- Salchicha Huachana -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Sándwich de Salchicha Huachana</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 18.50</span>
+                    </div>
+                    <span class="plato-desc">Salchicha regional revuelta con huevo, servida caliente.</span>
+                </div>
+
+                <!-- Pejerrey -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Pan con Pejerrey Arrebozado</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 16.00</span>
+                    </div>
+                    <span class="plato-desc">Pejerreyes fritos crocantes con zarza de cebolla.</span>
+                </div>
+
+                <!-- Tamal -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Tamal Criollo (Pollo o Cerdo)</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 8.50</span>
+                    </div>
+                    <span class="plato-desc">Masa de maíz suave con aceituna y maní, acompañado de zarza.</span>
+                </div>
+
+                <!-- Lomito al Jugo -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Lomito al Jugo</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 28.00</span>
+                    </div>
+                    <span class="plato-desc">Finos trozos de res salteados al wok con cebolla y tomate.</span>
+                </div>
+
+                <!-- Desayuno Cusqueño -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Desayuno Cusqueño</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 32.00</span>
+                    </div>
+                    <span class="plato-desc">Chicharrón de cerdo, mote, papas doradas y ensalada de hierbabuena.</span>
+                </div>
+            </div>
+        </details>
+
+        <!-- Categoría: Cafés -->
+        <details>
+            <summary>
+                <div class="summary-content">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=150" alt="Cafés">
+                    <div class="summary-text">
+                        <h2>Cafés</h2>
+                        <p>Barra 100% Grano Peruano</p>
+                        <small>Click para ver nuestra selección de grano</small>
+                    </div>
+                </div>
+            </summary>
+            <div class="menu-detalle">
+                
+                <!-- Café Pasado -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Café Pasado (Gota a Gota)</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 9.50</span>
+                    </div>
+                    <span class="plato-desc">Preparado como en casa, con esencia de café de Villa Rica.</span>
+                </div>
+
+                <!-- Café con Leche -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Café con Leche "De la Abuela"</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 11.50</span>
+                    </div>
+                    <span class="plato-desc">Esencia pura de café mezclada con leche caliente.</span>
+                </div>
+
+                <!-- Cortado / Macchiato -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Cortado / Macchiato</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 8.50</span>
+                    </div>
+                    <span class="plato-desc">Un shot de espresso cortado con una nube de leche.</span>
+                </div>
+
+                <!-- Latte de Algarrobina -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Latte de Algarrobina</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 15.50</span>
+                    </div>
+                    <span class="plato-desc">El clásico latte endulzado con jarabe orgánico de algarrobo del norte.</span>
+                </div>
+
+                <!-- Cappuccino de la Casa -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Cappuccino de la Casa</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 12.50</span>
+                    </div>
+                    <span class="plato-desc">Espresso equilibrado con leche cremosa y un toque de canela.</span>
+                </div>
+
+                <!-- Mocaccino -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Mocaccino de Cacao Amazónico</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 16.00</span>
+                    </div>
+                    <span class="plato-desc">Shot de espresso con chocolate de Satipo al 70% cacao.</span>
+                </div>
+
+                <!-- Café con Cacao y Canela -->
+                <div class="plato-item">
+                    <div class="plato">
+                        <div class="plato-header">
+                            <span class="plato-nombre">Café con Cacao y Canela</span>
+                            <div class="plato-puntos"></div>
+                        </div>
+                        <span class="plato-precio">S/ 14.00</span>
+                    </div>
+                    <span class="plato-desc">Una mezcla reconfortante muy popular en las zonas cafetaleras.</span>
+                </div>
+            </div>
+        </details>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Visítanos</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
+            </div>
+            <div>
+                <h4>Horario</h4>
+                <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; width: 80%;" />
+        <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
+    </footer>
+
+    <!-- Lógica de Scripts Unificados -->
+    <script>
+        // LÓGICA MENÚ MÓVIL
+        const menuToggle = document.getElementById("mobile-menu");
+        const navLinks = document.getElementById("nav-links");
+        const nav = document.getElementById("main-nav");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
+        });
+
+        // Navbar Efecto Scroll
+        window.addEventListener("scroll", () => {
+            let scrolly = window.scrollY;
+            if (scrolly > 80) {
+                nav.style.padding = "0.2rem 0";
+                nav.style.backgroundColor = "rgba(107, 62, 38, 0.95)";
+            } else {
+                nav.style.padding = "0.5rem 0";
+                nav.style.backgroundColor = "var(--cafe-medio)";
+            }
+        });
+
+        // Adaptar Pantalla clases helper
+        function adaptarPantalla() {
+            const ancho = window.innerWidth;
+            if (ancho <= 768) {
+                document.documentElement.classList.add("mobile");
+                document.documentElement.classList.remove("desktop");
+            } else {
+                document.documentElement.classList.add("desktop");
+                document.documentElement.classList.remove("mobile");
+            }
+        }
+        adaptarPantalla();
+        window.addEventListener("resize", adaptarPantalla);
+
+        // FUNCIONALIDAD DE LA CARTA INTERACTIVA
+        // 1. Efecto Acordeón
+        const items = document.querySelectorAll('details');
+        items.forEach(targetDetail => {
+            targetDetail.addEventListener('click', () => {
+                items.forEach(detail => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute('open');
+                    }
+                });
+            });
+        });
+
+        // 2. Buscador en tiempo real
+        const searchInput = document.getElementById('menuSearch');
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const platoItems = document.querySelectorAll('.plato-item');
+            const categories = document.querySelectorAll('details');
+
+            platoItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if(text.includes(term)) {
+                    item.style.display = 'block';
+                    item.closest('details').setAttribute('open', true);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if(term === "") {
+                categories.forEach((c, index) => {
+                    if(index === 0) {
+                        c.setAttribute('open', true); // Deja el primero abierto por defecto
+                    } else {
+                        c.removeAttribute('open');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

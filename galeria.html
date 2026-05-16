@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Retro Café - Galería</title>
+
+    <!-- Fuentes y CDN unificados de la marca -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* El contenedor del video ocupa toda la ventana */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .video-fondo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* mantiene la relación y recorta para llenar */
+            z-index: -1;        /* detrás del contenido */
+        }
+        :root {
+            --cafe-oscuro: #2c1a10;
+            --cafe-medio: #6b3e26;
+            --crema: #fdf5e6;
+            --dorado: #c69c6d;
+            --blanco: #ffffff;
+            --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--crema);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Encabezado --- */
+        header {
+            background-color: var(--cafe-oscuro);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--dorado);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blanco);
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        /* --- Botón Admin (Imagen Derecha) --- */
+        .imagen-derecha {
+            position: absolute;    
+            top: 10px;             
+            right: 10px;           
+            width: 50px;           
+            height: auto;
+            z-index: 2001;
+        }
+
+        /* --- Navegación --- */
+        nav {
+            background-color: var(--cafe-medio);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transicion);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: var(--blanco);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transicion);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 50%;
+            background: var(--dorado);
+            transition: var(--transicion);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after { width: 70%; }
+        .nav-links a:hover { color: var(--dorado); }
+
+        /* --- Menú Móvil --- */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            background: var(--cafe-medio);
+            font-weight: bold;
+        }
+
+        @media (max-width: 850px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--cafe-medio);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 15px;
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+        }
+
+        /* --- Contenedor de Galería Estilo Grid --- */
+        .contenedor {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 25px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* --- Estilos de Tarjetas de Detalles de Imagen --- */
+        details {
+            background: rgba(44, 26, 16, 0.85); /* Fondo semitransparente oscuro elegante */
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(198, 156, 109, 0.3);
+        }
+
+        details:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        summary {
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        .summary img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.3s ease;
+        }
+
+        details[open] .summary img {
+            filter: brightness(0.7);
+        }
+
+        .detalle {
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #fdf5e6 !important;
+            border-top: 2px solid var(--dorado);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .detalle h4 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: var(--dorado);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animación de apertura */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive de la Galería */
+        @media (max-width: 768px) {
+            .contenedor { flex-direction: column; align-items: center; }
+            details { width: 90%; max-width: 350px; }
+            header h1 { font-size: 2rem; }
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: var(--blanco);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo-container">
+            <img src="logocafe.svg" alt="Logo" width="60" style="filter: invert(1);">
+            <h1>RETRO CAFÉ</h1>
+        </div>
+    </header>
+
+    <!-- Botón hamburguesa para móviles -->
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i> MENÚ
+    </div>
+
+    <!-- Menú de navegación unificado (Galería activo en dorado) -->
+    <nav id="main-nav">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="carta.html">Carta</a></li>
+            <li><a href="galeria.html" style="color: #dcb28a;">Galería</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="pedironline.html">Pedir Online</a></li>
+        </ul>
+    </nav>
+
+    <!-- Video de fondo de la galería -->
+    <video class="video-fondo" src="videogaleria.mp4" autoplay muted loop playsinline></video>
+
+    <!-- Contenedor Principal de la Galería -->
+    <div class="contenedor"> 
+        
+        <!-- Hamburguesa -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="hamburguessa.jpeg" alt="Hamburguesa">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Una hamburguesa clásica lleva un medallón de carne molida sazonada con sal, pimienta, ajo y cebolla en polvo, servida en un pan tipo brioche. Se completa con queso cheddar fundido, lechuga, tomate y salsas tradicionales."</p>
+            </div>
+        </details>
+    
+        <!-- Torta de Chocolate -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="torta.jpeg" alt="Torta de Chocolate">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta torta de chocolate es una tentación irresistible de sabor intenso y textura húmeda. Destaca por su bizcocho esponjoso y una cobertura cremosa de fudge casero, logrando el equilibrio perfecto."</p>
+            </div>
+        </details>
+
+        <!-- Taza de café -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="taza de café.jpeg" alt="Taza de Café">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Descubre el auténtico sabor de un café clásico, diseñado para acompañar tus mañanas. Nuestro café destaca por un tostado equilibrado con notas aromáticas a chocolate y frutos secos."</p>
+            </div>
+        </details>
+
+        <!-- Cheesecake de Oreo -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="torta 2.jpeg" alt="Cheesecake de Oreo">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Este cheesecake de Oreo presenta una base de galletas trituradas, un relleno cremoso y una deliciosa cobertura de chantilly decorada con trozos de galleta."</p>
+            </div>
+        </details>
+
+        <!-- Café con Leche -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="café con leche.jpeg" alt="Café con Leche">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"El café latte (o latte) es una bebida suave y cremosa que combina una o dos dosis de café espresso con una abundante cantidad de leche al vapor."</p>
+            </div>
+        </details>
+
+        <!-- Café Clásico -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="café clásico.jpeg" alt="Café Clásico">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Se observa el café líquido fluyendo desde el portafiltro de la máquina hacia una taza blanca pequeña, diseñada para contener la esencia perfecta de entre 25 y 35 ml."</p>
+            </div>
+        </details>
+
+        <!-- Pan con Chicharrón -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="pan con chicharrón.jpeg" alt="Pan con Chicharrón">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"El pan con chicharrón peruano clásico se prepara principalmente con panceta de cerdo cocida a fuego lento, acompañada de camotes fritos, salsa criolla y pan francés crocante."</p>
+            </div>
+        </details>
+
+        <!-- Capuchino y su postre -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="capuchino y su postre.jpeg" alt="Capuchino y su postre">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Este plato es un waffle con fruta acompañado de una taza de café latte con arte latte en la parte superior."</p>
+                <h4>Detalles del waffle:</h4> 
+                <p>Está servido con fresas frescas y rodajas de durazno, rociado con salsa de caramelo.</p>
+                <h4>Detalles del café:</h4> 
+                <p>Un latte cremoso preparado con café peruano de especialidad.</p>
+            </div>
+        </details>
+
+        <!-- Café al Aire Libre -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="cafe al aire libre.jpeg" alt="Café al Aire Libre">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Disfrutando de un momento mágico e inspirador de brunch al aire libre en nuestra terraza."</p>
+            </div>
+        </details>
+
+        <!-- Cappuccino -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="capuccino.jpeg" alt="Cappuccino">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Un cappuccino clásico se compone de tres partes iguales de café, leche y espuma. Su base es un shot de espresso robusto extraído minuciosamente."</p>
+            </div>
+        </details>
+
+        <!-- Latte -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="latte.jpg" alt="Latte">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Un latte de vainilla es una bebida cremosa caracterizada por la mezcla de leche espumada, un shot de espresso y jarabe artesanal de vainilla."</p>
+            </div>
+        </details>
+
+        <!-- Croissant -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="croissabt.jpeg" alt="Croissant">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"El croissant es un bollo tradicional reconocido por su forma de media luna y su textura hojaldrada, crujiente por fuera y aireada por dentro con sabor mantecoso."</p>
+            </div>
+        </details>
+
+        <!-- Americano -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="amaericano.jpeg" alt="Americano">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta es una taza de café espresso americano servida en vidrio transparente, acompañada de dos galletas crujientes artesanales."</p>
+            </div>
+        </details>
+
+        <!-- Frappés -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="frappes.jpeg" alt="Frappés">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"El frappé es una bebida refrescante de hielo perfectamente licuado con café, leche seleccionada y tus jarabes de sabor favoritos."</p>
+            </div>
+        </details>
+
+        <!-- Té Negro -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="te_negro.jpg" alt="Té Negro">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta infusión seleccionada es rica en antioxidantes naturales y se puede servir caliente para el invierno o helada para refrescar tu tarde."</p>
+            </div>
+        </details>
+
+        <!-- Empanada -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="empanada.jpeg" alt="Empanada">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta imagen muestra una empanada horneada artesanal en un plato cuadrado blanco, acompañada de una ensalada fresca y una taza de café caliente."</p>
+            </div>
+        </details>
+
+        <!-- Pie de Manzana -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="pie de manzana.jpeg" alt="Pie de Manzana">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Fotografía de un delicioso trozo de tarta o pie de manzana tibio servido con una bola de helado de vainilla y un café expreso."</p>
+            </div>
+        </details>
+
+        <!-- Baguette -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="baguette.jpeg" alt="Baguette">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Un bocadillo de tortilla esponjosa y queso derretido en pan baguette crujiente servido con un clásico café negro pasado."</p>
+            </div>
+        </details>
+
+        <!-- Panini -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="panini.jpeg" alt="Panini">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"La selección incluye opciones populares como panini de prosciutto con mozzarella, caprese con tomate y albahaca, y variantes con pollo a la parrilla."</p>
+            </div>
+        </details>
+
+        <!-- Sándwich de Pavo -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="sandwich de pavo.jpeg" alt="Sándwich de Pavo">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta es una imagen de un sanguchón de pavo tradicional peruano, caracterizado por su pan crujiente de la casa, pavo asado jugoso y salsa criolla."</p>
+            </div>
+        </details>
+
+        <!-- Sándwich Deli -->
+        <details>
+            <summary>
+                <div class="summary">
+                    <img src="sandwich.jpeg" alt="Sándwich">
+                </div>
+            </summary>
+            <div class="detalle">
+                <p>"Esta imagen muestra un sándwich de estilo deli o submarino, caracterizado por su gran tamaño, embutidos premium y un abundante relleno de vegetales frescos."</p>
+            </div>
+        </details>
+
+    </div>
+
+    <!-- Pie de página unificado -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Visítanos</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Tomas Marzano 2424, Surco</p>
+            </div>
+            <div>
+                <h4>Horario</h4>
+                <p>Lun - Dom: 7:00 AM - 10:00 PM</p>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; width: 80%;" />
+        <p>&copy; 2026 Retro Café. Creado con pasión por el café.</p>
+    </footer>
+
+    <!-- Lógica de Scripts Unificados -->
+    <script>
+        // LÓGICA MENÚ MÓVIL
+        const menuToggle = document.getElementById("mobile-menu");
+        const navLinks = document.getElementById("nav-links");
+        const nav = document.getElementById("main-nav");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
+        });
+
+        // Navbar Efecto Scroll
+        window.addEventListener("scroll", () => {
+            let scrolly = window.scrollY;
+            if (scrolly > 80) {
+                nav.style.padding = "0.2rem 0";
+                nav.style.backgroundColor = "rgba(107, 62, 38, 0.95)";
+            } else {
+                nav.style.padding = "0.5rem 0";
+                nav.style.backgroundColor = "var(--cafe-medio)";
+            }
+        });
+
+        // Adaptar Pantalla clases helper
+        function adaptarPantalla() {
+            const ancho = window.innerWidth;
+            if (ancho <= 850) {
+                document.documentElement.classList.add("mobile");
+                document.documentElement.classList.remove("desktop");
+            } else {
+                document.documentElement.classList.add("desktop");
+                document.documentElement.classList.remove("mobile");
+            }
+        }
+        adaptarPantalla();
+        window.addEventListener("resize", adaptarPantalla);
+
+        // Efecto Acordeón Inteligente para la Galería (Cierra las otras tarjetas al abrir una nueva)
+        const items = document.querySelectorAll('details');
+        items.forEach(targetDetail => {
+            targetDetail.addEventListener('click', () => {
+                items.forEach(detail => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
