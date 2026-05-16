@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Retro Café | Calidad en cada taza</title>
 
     <link
@@ -11,260 +11,275 @@
     />
     <link
       rel="stylesheet"
+      mesh-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
     <style>
-              html, body {
-            height: 100%;
-            margin: 0;
-          }
-          .video-fondo {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* mantiene la relación y recorta para llenar */
-            z-index: -1;        /* detrás del contenido */
-          }
-              :root {
-                  --cafe-oscuro: #2c1a10;
-                  --cafe-medio: #6b3e26;
-                  --crema: #fdf5e6;
-                  --dorado: #c69c6d;
-                  --blanco: #ffffff;
-                  --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-              }
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      .video-fondo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+      :root {
+        --cafe-oscuro: #2c1a10;
+        --cafe-medio: #6b3e26;
+        --crema: #fdf5e6;
+        --dorado: #c69c6d;
+        --blanco: #ffffff;
+        --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
 
-              * { box-sizing: border-box; }
+      * { box-sizing: border-box; }
 
+      /* --- Encabezado --- */
+      header {
+        background-color: var(--cafe-oscuro);
+        padding: 1.5rem;
+        text-align: center;
+        border-bottom: 3px solid var(--dorado);
+      }
 
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
 
-              /* --- Encabezado --- */
-              header {
-                  background-color: var(--cafe-oscuro);
-                  padding: 1.5rem;
-                  text-align: center;
-                  border-bottom: 3px solid var(--dorado);
-              }
+      header h1 {
+        font-family: 'Playfair Display', serif;
+        color: var(--blanco);
+        font-size: 2.8rem;
+        margin: 0;
+        letter-spacing: 3px;
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background-color: var(--crema);
+        color: #333;
+        overflow-x: hidden;
+      }
 
-              .logo-container {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  gap: 15px;
-              }
+      /* --- Navegación --- */
+      nav {
+        background-color: var(--cafe-medio);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0.5rem 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: var(--transicion);
+      }
 
-              header h1 {
-                  font-family: 'Playfair Display', serif;
-                  color: var(--blanco);
-                  font-size: 2.8rem;
-                  margin: 0;
-                  letter-spacing: 3px;
-              }
-               body {
-                  font-family: 'Poppins', sans-serif;
-                  margin: 0;
-                  background-color: var(--crema);
-                  color: #333;
-                  overflow-x: hidden;
-              }
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        transition: var(--transicion);
+      }
 
-              /* --- Navegación --- */
-              nav {
-                  background-color: var(--cafe-medio);
-                  position: sticky;
-                  top: 0;
-                  z-index: 1000;
-                  padding: 0.5rem 0;
-                  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                  transition: var(--transicion);
-              }
+      .nav-links a {
+        color: var(--blanco);
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        position: relative;
+        transition: var(--transicion);
+      }
 
-              .nav-links {
-                  display: flex;
-                  justify-content: center;
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-              }
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 50%;
+        background: var(--dorado);
+        transition: var(--transicion);
+        transform: translateX(-50%);
+      }
 
-              .nav-links a {
-                  color: var(--blanco);
-                  padding: 10px 20px;
-                  text-decoration: none;
-                  font-weight: 600;
-                  font-size: 0.85rem;
-                  text-transform: uppercase;
-                  position: relative;
-                  transition: var(--transicion);
-              }
+      .nav-links a:hover::after { width: 70%; }
+      .nav-links a:hover { color: var(--dorado); }
 
-              .imagen {
-                  text-align: right;
+      /* --- Menu Toggle (Móvil) --- */
+      .menu-toggle { 
+        display: none; 
+        background-color: var(--cafe-oscuro);
+        color: var(--blanco);
+        text-align: center;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        border-bottom: 1px solid var(--dorado);
+      }
 
-              }
-
-              .nav-links a::after {
-                  content: '';
-                  position: absolute;
-                  width: 0;
-                  height: 2px;
-                  bottom: 5px;
-                  left: 50%;
-                  background: var(--dorado);
-                  transition: var(--transicion);
-                  transform: translateX(-50%);
-              }
-
-              .nav-links a:hover::after { width: 70%; }
-              .nav-links a:hover { color: var(--dorado); }
-
-              /* --- Hero --- */
-              .hero {
-                  height: 60vh;
-                  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                              url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
-                  background-size: cover;
-                  background-position: center;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  color: white;
-                  text-align: center;
-                  padding: 10px;
-                  overflow: hidden;
-              }
-
-              .hero h2 {
-                  font-family: 'Playfair Display', serif;
-                  font-size: clamp(2rem, 5vw, 3.5rem);
-                  margin-bottom: 1rem;
-                  min-height: 1.2em; /* Evita saltos mientras se escribe */
-              }
-
-              /* --- Contenedor Principal --- */
-              .container {
-                  max-width: 1100px;
-                  margin: -50px auto 50px;
-                  padding: 40px;
-                  background: white;
-                  border-radius: 12px;
-                  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                  position: relative;
-              }
-
-              .grid-features {
-                  display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                  gap: 30px;
-                  margin-top: 40px;
-              }
-
-              .feature-card {
-                  padding: 20px;
-                  border: 1px solid #eee;
-                  border-radius: 8px;
-                  transition: var(--transicion);
-                  text-align: center;
-                  background: white;
-              }
-
-              .feature-card:hover {
-                  transform: translateY(-10px);
-                  border-color: var(--dorado);
-                  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-              }
-
-              .feature-card i {
-                  font-size: 2rem;
-                  color: var(--cafe-medio);
-                  margin-bottom: 15px;
-              }
-
-              /* --- Botón Ir Arriba --- */
-              #scrollTopBtn {
-                  display: none;
-                  position: fixed;
-                  bottom: 20px;
-                  right: 20px;
-                  z-index: 2000;
-                  border: none;
-                  background-color: var(--dorado);
-                  color: white;
-                  cursor: pointer;
-                  padding: 15px;
-                  border-radius: 50%;
-                  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-                  transition: var(--transicion);
-              }
-
-              #scrollTopBtn:hover {
-                  background-color: var(--cafe-oscuro);
-                  transform: scale(1.1);
-              }
-
-              /* --- Pie de Página --- */
-              footer {
-                  background-color: var(--cafe-oscuro);
-                  color: var(--blanco);
-                  padding: 4rem 2rem 2rem;
-                  text-align: center;
-              }
-
-              .footer-content {
-                  display: flex;
-                  flex-wrap: wrap;
-                  justify-content: space-around;
-                  max-width: 1200px;
-                  margin: 0 auto 2rem;
-                  gap: 30px;
-              }
-
-
-               .redes{
-                  display: flex;
-                  justify-content: center;
-                  gap: 20px;
-              }
-
-              .redes a{
-                  font-size: 40px;
-                  color: #333;
-                  transition: 0.3s;
-              }
-
-              .redes a:hover{
-                  transform: scale(1.2);
-              }
-
-              .facebook:hover{
-                  color: #1877F2;
-              }
-
-              .instagram:hover{
-                  color: #E4405F;
-              }
-
-              .whatsapp:hover{
-                  color: #25D366;
-              }
-              
-        @media (max-width: 850px) {
-            .main-container { grid-template-columns: 1fr; }
+      /* Responsive Nav */
+      @media (max-width: 768px) {
+        .menu-toggle { display: block; }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background-color: var(--cafe-medio);
         }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links li {
+          text-align: center;
+          padding: 15px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+      }
 
-             .menu-toggle { display: none; }
-              .imagen-derecha {
-                  position: absolute;    /* Se mueve libremente dentro del contenedor */
-                  top: 10px;             /* Distancia desde arriba */
-                  right: 10px;           /* Distancia desde la derecha */
-                  width: 50px;           /* Tamaño de tu imagen */
-                  height: auto;
-              }
-   
+      /* --- Hero --- */
+      .hero {
+        height: 60vh;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                    url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        overflow: hidden;
+      }
+
+      .hero h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: 1rem;
+        min-height: 1.2em;
+      }
+
+      /* --- Contenedor Principal --- */
+      .container {
+        max-width: 1100px;
+        margin: -50px auto 50px;
+        padding: 40px;
+        background: var(--blanco);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 10;
+      }
+
+      .grid-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+        perspective: 1000px; /* Necesario para el efecto 3D */
+      }
+
+      .feature-card {
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        text-align: center;
+        background: white;
+        transition: transform 0.1s ease, box-shadow 0.3s ease; /* Transición rápida para el efecto 3D */
+        transform-style: preserve-3d;
+      }
+
+      .feature-card:hover {
+        border-color: var(--dorado);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      }
+
+      .feature-card i {
+        font-size: 2rem;
+        color: var(--cafe-medio);
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+      }
+      
+      .feature-card:hover i {
+        transform: translateZ(30px) scale(1.1); /* Saca el icono en 3D */
+      }
+
+      /* --- Botón Ir Arriba --- */
+      #scrollTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2000;
+        border: none;
+        background-color: var(--dorado);
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transition: var(--transicion);
+      }
+
+      #scrollTopBtn:hover {
+        background-color: var(--cafe-oscuro);
+        transform: scale(1.1);
+      }
+
+      /* --- Pie de Página --- */
+      footer {
+        background-color: var(--cafe-oscuro);
+        color: var(--blanco);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        gap: 30px;
+      }
+
+      .social-icons a {
+        font-size: 30px;
+        color: var(--dorado);
+        margin: 0 10px;
+        transition: var(--transicion);
+      }
+
+      .social-icons a:hover { transform: scale(1.2); }
+      .social-icons .facebook:hover { color: #1877F2; }
+      .social-icons .instagram:hover { color: #E4405F; }
+      .social-icons .whatsapp:hover { color: #25D366; }
+               
+      @media (max-width: 850px) {
+        .main-container { grid-template-columns: 1fr; }
+      }
+
+      .imagen-derecha {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: auto;
+        z-index: 100;
+      }
     </style>
   </head>
 
@@ -273,7 +288,7 @@
       <div class="contenedor">
         <img
           src="logousuario.png"
-          alt="Logo"
+          alt="Logo Usuario"
           width="40"
           class="imagen-derecha"
         />
@@ -284,7 +299,7 @@
       <div class="logo-container">
         <img
           src="logocafe.svg"
-          alt="Logo"
+          alt="Logo Café"
           width="60"
           style="filter: invert(1)"
         />
@@ -306,6 +321,7 @@
         <li><a href="pedironline.html">Pedir Online</a></li>
       </ul>
     </nav>
+
     <video
       class="video-fondo"
       src="videoindex.mp4"
@@ -314,9 +330,10 @@
       loop
       playsinline
     ></video>
+
     <section class="hero" id="hero">
       <h2 id="typewriter">"El día comienza después de una taza de café"</h2>
-      <p style="font-size: 1.2rem; font-style: italic">
+      <p id="saludo-dinamico" style="font-size: 1.2rem; font-style: italic">
         Calidad artesanal en cada grano.
       </p>
     </section>
@@ -389,105 +406,134 @@
     </footer>
 
     <script>
-      // 1. LÓGICA MENÚ MÓVIL
-      const menuToggle = document.getElementById("mobile-menu");
-      const navLinks = document.getElementById("nav-links");
+      document.addEventListener("DOMContentLoaded", () => {
+        
+        // 1. LÓGICA MENÚ MÓVIL
+        const menuToggle = document.getElementById("mobile-menu");
+        const navLinks = document.getElementById("nav-links");
 
-      menuToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active"); // Abre/Cierra el menú
-      });
-
-      // Cerrar menú al hacer clic en un link (para móviles)
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("active");
+        menuToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
         });
-      });
 
-      // 2. MÁQUINA DE ESCRIBIR
-      const twElement = document.getElementById("typewriter");
-      const text = twElement.innerText;
-      twElement.innerText = "";
-      let i = 0;
-      function typeWriter() {
-        if (i < text.length) {
-          twElement.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
-      }
-
-      // 3. NAVBAR SCROLL & BOTÓN "IR ARRIBA" & PARALLAX
-      const btnTop = document.getElementById("scrollTopBtn");
-      const nav = document.getElementById("main-nav");
-      const hero = document.getElementById("hero");
-
-      window.addEventListener("scroll", () => {
-        let scrolly = window.scrollY;
-
-        // Navbar Efecto
-        if (scrolly > 80) {
-          nav.style.padding = "0.2rem 0";
-          nav.style.backgroundColor = "rgba(107, 62, 38, 0.95)";
-        } else {
-          nav.style.padding = "0.5rem 0";
-          nav.style.backgroundColor = "var(--cafe-medio)";
-        }
-
-        // Botón arriba
-        btnTop.style.display = scrolly > 400 ? "block" : "none";
-
-        // Parallax Hero
-        hero.style.backgroundPositionY = scrolly * 0.5 + "px";
-      });
-
-      btnTop.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // 4. SCROLL REVEAL (Tarjetas)
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = "1";
-              entry.target.style.transform = "translateY(0)";
-            }
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
           });
-        },
-        { threshold: 0.1 },
-      );
+        });
 
-      document.querySelectorAll(".feature-card").forEach((card) => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
-        card.style.transition = "all 0.8s ease-out";
-        observer.observe(card);
-      });
-
-      // Iniciar máquina de escribir al cargar
-      window.onload = typeWriter;
-    </script>
-    <script>
-      function adaptarPantalla() {
-        const ancho = window.innerWidth;
-
-        if (ancho <= 768) {
-          document.documentElement.classList.add("mobile");
-          document.documentElement.classList.remove("desktop");
-        } else {
-          document.documentElement.classList.add("desktop");
-          document.documentElement.classList.remove("mobile");
+        // 2. MÁQUINA DE ESCRIBIR
+        const twElement = document.getElementById("typewriter");
+        const text = twElement.innerText;
+        twElement.innerText = "";
+        let i = 0;
+        function typeWriter() {
+          if (i < text.length) {
+            twElement.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+          }
         }
-      }
+        // Iniciar máquina de escribir
+        typeWriter();
 
-      // Ejecutar al cargar
-      adaptarPantalla();
+        // 3. SALUDO DINÁMICO SEGÚN LA HORA
+        const saludoElement = document.getElementById("saludo-dinamico");
+        const hora = new Date().getHours();
+        let saludoTexto = "Calidad artesanal en cada grano.";
+        
+        if (hora >= 6 && hora < 12) {
+          saludoTexto = "¡Buenos días! El aroma perfecto para empezar tu jornada.";
+        } else if (hora >= 12 && hora < 19) {
+          saludoTexto = "¡Buenas tardes! Regálate un respiro con el mejor café.";
+        } else {
+          saludoTexto = "¡Buenas noches! Una taza tibia para cerrar el día.";
+        }
+        saludoElement.innerText = saludoTexto;
 
-      // Ejecutar cuando cambie tamaño
-      window.addEventListener("resize", adaptarPantalla);
-      const menu = document.querySelector('.nav-links');
-      const toggle = document.querySelector('#mobile-menu'); // tu botón hamburguesa
+        // 4. NAVBAR SCROLL & BOTÓN "IR ARRIBA" & PARALLAX
+        const btnTop = document.getElementById("scrollTopBtn");
+        const nav = document.getElementById("main-nav");
+        const hero = document.getElementById("hero");
+
+        window.addEventListener("scroll", () => {
+          let scrolly = window.scrollY;
+
+          if (scrolly > 80) {
+            nav.style.padding = "0.2rem 0";
+            nav.style.backgroundColor = "rgba(107, 62, 38, 0.95)";
+          } else {
+            nav.style.padding = "0.5rem 0";
+            nav.style.backgroundColor = "var(--cafe-medio)";
+          }
+
+          btnTop.style.display = scrolly > 400 ? "block" : "none";
+          hero.style.backgroundPositionY = scrolly * 0.5 + "px";
+        });
+
+        btnTop.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // 5. SCROLL REVEAL (Tarjetas)
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".feature-card").forEach((card) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(30px)";
+          card.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+          observer.observe(card);
+        });
+
+        // 6. EFECTO MAGNÉTIKO 3D EN TARJETAS (Efecto Premium)
+        const cards = document.querySelectorAll(".feature-card");
+        cards.forEach(card => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; // posición X del cursor en la tarjeta
+            const y = e.clientY - rect.top;  // posición Y del cursor en la tarjeta
+            
+            const cardWidth = rect.width;
+            const cardHeight = rect.height;
+            
+            // Calcula ángulos de rotación basados en la posición (máx 15 grados)
+            const rotateX = ((y / cardHeight) - 0.5) * -15;
+            const rotateY = ((x / cardWidth) - 0.5) * 15;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          });
+          
+          // Resetea la posición original cuando el mouse sale
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "rotateX(0deg) rotateY(0deg)";
+          });
+        });
+
+        // 7. DETECTOR DE PANTALLA (Añade clases útiles al HTML)
+        function adaptarPantalla() {
+          const ancho = window.innerWidth;
+          if (ancho <= 768) {
+            document.documentElement.classList.add("mobile");
+            document.documentElement.classList.remove("desktop");
+          } else {
+            document.documentElement.classList.add("desktop");
+            document.documentElement.classList.remove("mobile");
+            navLinks.classList.remove("active"); // Cierra menú móvil si pasa a PC
+          }
+        }
+        adaptarPantalla();
+        window.addEventListener("resize", adaptarPantalla);
+      });
     </script>
   </body>
 </html>
